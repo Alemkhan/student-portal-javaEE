@@ -3,15 +3,18 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
+
     <resource-ref>
         <description>JDBC connection</description>
         <res-ref-name>jdbc/week</res-ref-name>
         <res-type>javax.sql.DataSource</res-type>
         <res-auth>Container</res-auth>
     </resource-ref>
+
     <welcome-file-list>
         <welcome-file>login.jsp</welcome-file>
     </welcome-file-list>
+
     <display-name>Archetype Created Web Application</display-name>
     <servlet>
         <servlet-name>rest-servlet</servlet-name>
@@ -20,7 +23,7 @@
         </servlet-class>
         <init-param>
             <param-name>com.sun.jersey.config.property.packages</param-name>
-            <param-value>student-portal-javaEE</param-value>
+            <param-value>Services</param-value>
         </init-param>
         <init-param>
             <param-name>com.sun.jersey.api.json.POJOMappingFeature</param-name>
@@ -28,6 +31,7 @@
         </init-param>
         <load-on-startup>1</load-on-startup>
     </servlet>
+
     <servlet-mapping>
         <servlet-name>rest-servlet</servlet-name>
         <url-pattern>/rest/*</url-pattern>

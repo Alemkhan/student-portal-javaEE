@@ -24,10 +24,8 @@ public class UserService {
 
     @POST
     @Path("/login")
-    @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.TEXT_HTML)
     public Response login(@FormParam("email") String email, @FormParam("password") String password) throws SQLException {
-        System.out.println("HELLO");
         User logginedUser = userDAO.getForLogin(email, password);
         if (logginedUser == null) {
             return Response.status(400).entity("Wrong email or password").build();

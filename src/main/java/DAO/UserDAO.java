@@ -21,7 +21,7 @@ public class UserDAO implements DAO<User>, LoginDAO<User>{
 
         con = DatabaseConnection.createConnection();
         String sql = "select u.user_id, u.first_name, u.last_name, u.email, u.role_id, " +
-                "u.major_id, m.major_name " +
+                "r.role_name, u.major_id, m.major_name " +
                 "from users u join majors m on u.major_id = m.major_id " +
                 "join roles r on u.role_id = r.role_id " +
                 "where email = ? and password = ?";
@@ -30,7 +30,7 @@ public class UserDAO implements DAO<User>, LoginDAO<User>{
         stmt.setString(2, password);
         ResultSet resultSet = stmt.executeQuery();
 
-        if (resultSet.next()) {
+        while (resultSet.next()) {
 
             int user_id = resultSet.getInt("user_id");
             String fname = resultSet.getString("first_name");

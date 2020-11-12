@@ -12,38 +12,44 @@
         <title>Login Page</title>
     </head>
     <body>
+    <div id="addResultDiv" style="color: red"></div>
         <form id="userForm">
             <label for="email">Email:</label><br>
             <input type="email" name="email" class="form-control" id="email"><br>
             <label for="password">Password:</label><br>
             <input type="password" name="password" class="form-control" id="password"><br>
-            <input type="submit" class="btn btn-primary" value="Log In">
+            <input type="button" class="btn btn-primary" id="btn" value="Log In">
         </form>
     </body>
     <script>
-        $(document).ready(function (){
-            email = $(this).find("#email").val();
-            password = $(this).find("#password").val();
-            $("#userForm").submit(function (){
-                $.ajax({
-                    type: 'POST',
-                    url: 'rest/userService/login',
-                    contentType: 'application/json',
-                    data: {
-                        "email" : email,
-                        "password" : password
-                    },
-                    success: {
-                        function(result) {
-                            console.log(result)
-                        }
-                    },
-                    failure : {
-                        function(result) {
-                            console.log(result)
-                        }
+        $("#btn").click(function (){
+            event.preventDefault();
+            email = $("#email").val();
+            password = $("#password").val();
+            var arr = {
+                "email" : email,
+                "password" : password
+            };
+            $.ajax({
+                type: 'POST',
+                url: 'rest/userService/login',
+                contentType: 'application/json',
+                data: {
+                    "email" : email,
+                    "password" : password
+                },
+                success: {
+                    function(result) {
+                        $('#addResultDiv').html('');
+                        $('#addResultDiv').html(result);
                     }
-                });
+                },
+                failure : {
+                    function(result) {
+                        $('#addResultDiv').html('');
+                        $('#addResultDiv').html(result);
+                    }
+                }
             });
         });
     </script>
