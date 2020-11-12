@@ -7,10 +7,9 @@ public class Student extends User {
     private Major major;
     private HashMap<Club, String> clubs; //Map of Clubs with Club - Club Role Match
 
-    public Student(String first_name, String last_name, String email, int role_id, Major major, HashMap<Club, String> clubs) {
-        super(first_name, last_name, email, role_id);
+    public Student(int id, String first_name, String last_name, String email, Role role, Major major) {
+        super(id, first_name, last_name, email, role);
         this.major = major;
-        this.clubs = clubs;
     }
 
     public Major getMajor() {

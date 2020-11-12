@@ -1,17 +1,34 @@
 package Models;
 
-public abstract class User {
+import java.io.Serializable;
 
+public abstract class User implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
+    private int id;
     private String first_name;
     private String last_name;
     private String email;
-    private int role_id;
+    private Role role;
 
-    public User(String first_name, String last_name, String email, int role_id) {
+    public User() {
+    }
+
+    public User(int id, String first_name, String last_name, String email, Role role) {
+        this.id = id;
         this.first_name = first_name;
         this.last_name = last_name;
         this.email = email;
-        this.role_id = role_id;
+        this.role = role;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getFirst_name() {
@@ -38,11 +55,11 @@ public abstract class User {
         this.email = email;
     }
 
-    public int getRole_id() {
-        return role_id;
+    public Role getRole() {
+        return role;
     }
 
-    public void setRole_id(int role_id) {
-        this.role_id = role_id;
+    public void setRole(Role role) {
+        this.role = role;
     }
 }
