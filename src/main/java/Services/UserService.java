@@ -28,7 +28,7 @@ public class UserService {
     public Response login(@FormParam("email") String email, @FormParam("password") String password) throws SQLException {
         User logginedUser = userDAO.getForLogin(email, password);
         if (logginedUser == null) {
-            return Response.status(400).entity("Wrong email or password").build();
+            return Response.status(Response.Status.NOT_FOUND).entity("Wrong email or password").build();
         } else if (logginedUser instanceof Admin) {
             HttpSession session = request.getSession();
             session.setMaxInactiveInterval(5*60);

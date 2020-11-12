@@ -40,17 +40,16 @@
                 },
                 success: {
                     function(result) {
-                        $('#addResultDiv').html('');
                         $('#addResultDiv').html(result);
                     }
                 },
-                failure : {
-                    function(result) {
-                        $('#addResultDiv').html('');
-                        $('#addResultDiv').html(result);
+                error : {
+                    function(jqxhr, status, errorMsg) {
+                        alert('Failed! ' + errorMsg);
                     }
                 }
             });
+            return false;
         });
     </script>
 </html>
