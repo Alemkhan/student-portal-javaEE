@@ -14,6 +14,10 @@ public class Club {
         this.avatar = avatar;
     }
 
+    public Club(int club_id) {
+        this.club_id = club_id;
+    }
+
     public int getClub_id() {
         return club_id;
     }
