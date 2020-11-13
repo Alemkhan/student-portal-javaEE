@@ -6,9 +6,17 @@ public class Club {
     private String club_name;
     private String description;
     private String avatar;
+    private int owner_id;
 
-    public Club(int club_id, String club_name, String description, String avatar) {
+    public Club(int club_id, String club_name, String description, String avatar, int owner_id) {
         this.club_id = club_id;
+        this.club_name = club_name;
+        this.description = description;
+        this.avatar = avatar;
+        this.owner_id = owner_id;
+    }
+
+    public Club(String club_name, String description, String avatar) {
         this.club_name = club_name;
         this.description = description;
         this.avatar = avatar;

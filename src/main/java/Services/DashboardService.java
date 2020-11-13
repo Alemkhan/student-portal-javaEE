@@ -17,6 +17,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 @Path("dashboard")
 public class DashboardService {
@@ -29,10 +30,15 @@ public class DashboardService {
     private final EventDAO eventDAO = new EventDAO();
 
     @GET
-    @Path("/showAll")
     @Produces(MediaType.APPLICATION_JSON)
     public Response showContent() throws SQLException {
+        HashMap<String, ArrayList<?>> content = new HashMap<>();
         ArrayList<Club> allClubs = clubDAO.getAll();
-        return Response.status(Response.Status.OK).entity(allClubs).build();
+        ArrayList<Event> allEvents = eventDAO.getAll();
+        ArrayList<News> allNews = newsDAO.getAll();
+        content.put("clubs", allClubs);
+        content.put("events", allEvents);
+        content.put("news", allNews);
+        return Response.status(Response.Status.OK).entity(content).build();
     }
 }

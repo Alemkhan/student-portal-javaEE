@@ -12,7 +12,7 @@ import java.util.List;
 
 public class UserDAO implements DAO<User>, LoginDAO<User>{
 
-    private Connection con;
+    private Connection con = null;
 
     @Override
     public User get(int id) {
@@ -26,7 +26,6 @@ public class UserDAO implements DAO<User>, LoginDAO<User>{
 
     @Override
     public User getForLogin(String email, String password) throws SQLException {
-
         con = DatabaseConnection.createConnection();
         String sql = "select u.user_id, u.first_name, u.last_name, u.email, u.role_id, " +
                 "r.role_name, u.major_id, m.major_name " +
@@ -55,9 +54,8 @@ public class UserDAO implements DAO<User>, LoginDAO<User>{
             if (role_name.equals("admin")) {
                 return new Admin(user_id,fname,lname,localEmail,role);
             } else {
-                return new Student(user_id,fname,lname,localEmail,role,major, getStudentClubs(user_id));
+                return new Student(user_id, fname, lname, localEmail, role, major, getStudentClubs(user_id));
             }
-
         }
         return null;
     }
@@ -76,7 +74,6 @@ public class UserDAO implements DAO<User>, LoginDAO<User>{
         ResultSet rs = stmt1.executeQuery();
 
         while (rs.next()) {
-
             int club_id = rs.getInt("club_id");
             String club_name = rs.getString("club_name");
             String description = rs.getString("description");
