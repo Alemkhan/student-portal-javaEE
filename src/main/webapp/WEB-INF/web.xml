@@ -15,12 +15,9 @@
         <welcome-file>login.jsp</welcome-file>
     </welcome-file-list>
 
-    <display-name>Archetype Created Web Application</display-name>
     <servlet>
-        <servlet-name>rest-servlet</servlet-name>
-        <servlet-class>
-            com.sun.jersey.spi.container.servlet.ServletContainer
-        </servlet-class>
+        <servlet-name>jersey-serlvet</servlet-name>
+        <servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer</servlet-class>
         <init-param>
             <param-name>com.sun.jersey.config.property.packages</param-name>
             <param-value>Services</param-value>
@@ -33,7 +30,8 @@
     </servlet>
 
     <servlet-mapping>
-        <servlet-name>rest-servlet</servlet-name>
-        <url-pattern>/rest/*</url-pattern>
+        <servlet-name>jersey-serlvet</servlet-name>
+        <url-pattern>/rest/* </url-pattern>
     </servlet-mapping>
+
 </web-app>

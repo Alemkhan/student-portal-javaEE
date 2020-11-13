@@ -38,16 +38,17 @@
                     "email" : email,
                     "password" : password
                 },
-                success: {
-                    function(result) {
-                        $('#addResultDiv').html(result);
+                success:
+                    function(response) {
+                        $('#addResultDiv').html(response.responseText);
+                    },
+                error :
+                    function(response) {
+                        console.log(response.responseText)
+                        if (response.status === 404) {
+                            $('#addResultDiv').html(response.responseText);
+                        }
                     }
-                },
-                error : {
-                    function(jqxhr, status, errorMsg) {
-                        alert('Failed! ' + errorMsg);
-                    }
-                }
             });
             return false;
         });

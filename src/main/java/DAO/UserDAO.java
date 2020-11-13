@@ -6,7 +6,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class UserDAO implements DAO<User>, LoginDAO<User>{
 
@@ -14,6 +16,11 @@ public class UserDAO implements DAO<User>, LoginDAO<User>{
 
     @Override
     public User get(int id) {
+        return null;
+    }
+
+    @Override
+    public ArrayList<User> getAll() {
         return null;
     }
 
@@ -44,6 +51,7 @@ public class UserDAO implements DAO<User>, LoginDAO<User>{
             Role role = new Role(role_id, role_name);
             Major major = new Major(major_id, major_name);
 
+            con.close();
             if (role_name.equals("admin")) {
                 return new Admin(user_id,fname,lname,localEmail,role);
             } else {
@@ -78,7 +86,7 @@ public class UserDAO implements DAO<User>, LoginDAO<User>{
             clubMap.put(club, club_role_name);
 
         }
-
+        con.close();
         return clubMap;
     }
 
