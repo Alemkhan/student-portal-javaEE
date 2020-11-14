@@ -21,10 +21,6 @@
         <h2 class="card-header text-light bg-dark">
             CLUBS
         </h2>
-        <%
-            ArrayList<Club> clubs = (ArrayList<Club>)request.getAttribute("clubs");
-            System.out.println(clubs);
-        %>
         <c:forEach var="club" items="${clubs}">
             <a href="clubs?id=<c:out value="${club.getClub_id()}"/> " class="list-group-item list-group-item-action">
                 <c:out value="${club.getClub_name()}"/>
