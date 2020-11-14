@@ -6,17 +6,17 @@ public class Club {
     private String club_name;
     private String description;
     private String avatar;
-    private int owner_id;
+    private User owner;
 
     public Club() {
     }
 
-    public Club(int club_id, String club_name, String description, String avatar, int owner_id) {
+    public Club(int club_id, String club_name, String description, String avatar, User owner) {
         this.club_id = club_id;
         this.club_name = club_name;
         this.description = description;
         this.avatar = avatar;
-        this.owner_id = owner_id;
+        this.owner = owner;
     }
 
     public Club(String club_name, String description, String avatar) {
@@ -25,8 +25,9 @@ public class Club {
         this.avatar = avatar;
     }
 
-    public Club(int club_id) {
+    public Club(int club_id, String club_name) {
         this.club_id = club_id;
+        this.club_name = club_name;
     }
 
     public int getClub_id() {
@@ -59,5 +60,13 @@ public class Club {
 
     public void setAvatar(String avatar) {
         this.avatar = avatar;
+    }
+
+    public User getOwner() {
+        return owner;
+    }
+
+    public void setOwner(User owner) {
+        this.owner = owner;
     }
 }

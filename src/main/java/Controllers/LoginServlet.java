@@ -25,8 +25,10 @@ public class LoginServlet extends HttpServlet {
         try {
             User user = us.login(userEmail, userPassword);
             if (user == null) {
-                response.sendRedirect("error.jsp");
+                request.setAttribute("messageResponse","Login failed: wrong login credentials");
+                request.getRequestDispatcher("/").forward(request,response);
             } else {
+                request.setAttribute("messageResponse",null);
                 HttpSession userSession = request.getSession();
                 userSession.setAttribute("user", user);
                 userSession.setMaxInactiveInterval(60*15);

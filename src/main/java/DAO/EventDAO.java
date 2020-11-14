@@ -35,7 +35,8 @@ public class EventDAO implements DAO<Event>{
                 String event_description = resultSet.getString("description");
                 Date event_date = resultSet.getDate("event_date");
                 int club_id = resultSet.getInt("club_id");
-                Club club = new Club(club_id);
+                Club club = new Club();
+                club.setClub_id(club_id);
                 Event event = new Event(event_id, event_title, event_description,event_date, club);
 
                 events.add(event);

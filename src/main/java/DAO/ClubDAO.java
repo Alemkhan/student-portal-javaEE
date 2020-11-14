@@ -2,6 +2,8 @@ package DAO;
 
 import Models.Club;
 import Models.News;
+import Models.Student;
+import Models.User;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -24,8 +26,9 @@ public class ClubDAO implements DAO<Club>{
         try {
             
             con = DatabaseConnection.createConnection();
-            sql = "select * from clubs where club_id=?";
+            sql = "select c.*, u.email from clubs c JOIN users u ON c.owner_id = u.user_id where club_id=?";
             stmt = con.prepareStatement(sql);
+            stmt.setInt(1, id);
             resultSet = stmt.executeQuery();
             
             if (resultSet.next()) {
@@ -35,8 +38,11 @@ public class ClubDAO implements DAO<Club>{
                 String club_description = resultSet.getString("description");
                 String club_avatar = resultSet.getString("avatar");
                 int owner_id = resultSet.getInt("owner_id");
-
-                club = new Club(club_id, club_name, club_description, club_avatar, owner_id);
+                String owner_email = resultSet.getString("email");
+                User owner = new Student();
+                owner.setId(owner_id);
+                owner.setEmail(owner_email);
+                club = new Club(club_id, club_name, club_description, club_avatar, owner);
             }
             
         } catch (SQLException e) {
@@ -53,7 +59,7 @@ public class ClubDAO implements DAO<Club>{
 
         try {
             con = DatabaseConnection.createConnection();
-            sql = "select * from clubs";
+            sql = "select c.*, u.email from clubs c JOIN users u ON c.owner_id = u.user_id";
             stmt = con.prepareStatement(sql);
             resultSet = stmt.executeQuery();
             while (resultSet.next()){
@@ -63,8 +69,11 @@ public class ClubDAO implements DAO<Club>{
                 String club_description = resultSet.getString("description");
                 String club_avatar = resultSet.getString("avatar");
                 int owner_id = resultSet.getInt("owner_id");
-
-                Club club = new Club(club_id, club_name, club_description, club_avatar, owner_id);
+                String owner_email = resultSet.getString("email");
+                User owner = new Student();
+                owner.setId(owner_id);
+                owner.setEmail(owner_email);
+                Club club = new Club(club_id, club_name, club_description, club_avatar, owner);
 
                 clubs.add(club);
             }

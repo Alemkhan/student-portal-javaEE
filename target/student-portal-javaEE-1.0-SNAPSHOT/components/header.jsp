@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: Assylkhan
@@ -5,6 +6,9 @@
   Time: 21:47
   To change this template use File | Settings | File Templates.
 --%>
+<%
+
+%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -26,7 +30,13 @@
             </li>
         </ul>
         <form class="form-inline my-2 my-lg-0">
-            <button class="text-lg btn btn-outline-light my-2 my-sm-0" type="submit">Profile</button>
+            <!--!!!!!!!!!!!!!!!!!CSS PLEASE!!!!!!!!!!!!!!!!!!!-->
+            <p>
+                Hello, <c:out value="${sessionScope.user.first_name} ${sessionScope.user.last_name}"/>
+            </p>
+            <a href="profile?id=<c:out value="${sessionScope.user.id}"/>">
+                <button class="text-lg btn btn-outline-light my-2 my-sm-0" type="submit">Profile</button>
+            </a>
             <div class="media ml-3">
                 <img src="https://www.meme-arsenal.com/memes/4755e2d723dc73f9757832eff0992707.jpg" style="height: 64px; width: 64px; border-radius: 50%" class="mr-3" alt="...">
             </div>

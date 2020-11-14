@@ -17,9 +17,9 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 
-@Path("dashboard")
 public class DashboardService {
 
     @Context private HttpServletRequest request;
@@ -36,6 +36,8 @@ public class DashboardService {
         ArrayList<Club> allClubs = clubDAO.getAll();
         ArrayList<Event> allEvents = eventDAO.getAll();
         ArrayList<News> allNews = newsDAO.getAll();
+        Collections.sort(allEvents);
+        Collections.sort(allNews);
         content.put("clubs", allClubs);
         content.put("events", allEvents);
         content.put("news", allNews);
