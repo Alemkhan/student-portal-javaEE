@@ -1,3 +1,7 @@
+<%@ page import="java.lang.reflect.Array" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="Models.Club" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: Assylkhan
@@ -17,10 +21,16 @@
         <h2 class="card-header text-light bg-dark">
             CLUBS
         </h2>
-        <a href="#" class="list-group-item list-group-item-action"> Club #1</a>
-        <a href="#" class="list-group-item list-group-item-action"> Club #1</a>
-        <a href="#" class="list-group-item list-group-item-action"> Club #1</a>
-        <a href="#" class="list-group-item list-group-item-action"> Club #1</a>
+        <%
+            ArrayList<Club> clubs = (ArrayList<Club>)request.getAttribute("clubs");
+            System.out.println(clubs);
+        %>
+        <c:forEach var="club" items="${clubs}">
+            <a href="clubs?id=<c:out value="${club.getClub_id()}"/> " class="list-group-item list-group-item-action">
+                <c:out value="${club.getClub_name()}"/>
+            </a>
+        </c:forEach>
+
     </div>
     <div class="col-7">
         <div class="jumbotron">

@@ -1,5 +1,8 @@
 package Controllers;
 
+import Models.Club;
+import Models.Event;
+import Models.News;
 import Services.DashboardService;
 
 import javax.servlet.ServletException;
@@ -26,7 +29,16 @@ public class DashboardServlet extends HttpServlet {
         try {
 
             HashMap<String, ArrayList<?>> content = ds.showContent();
-            request.getRequestDispatcher("index.jsp").forward(request, response);
+
+            ArrayList<Club> clubs = (ArrayList<Club>) content.get("clubs");
+            ArrayList<Event> events = (ArrayList<Event>) content.get("events");
+            ArrayList<News> news = (ArrayList<News>) content.get("news");
+
+            request.setAttribute("clubs", clubs);
+            request.setAttribute("events", events);
+            request.setAttribute("news", news);
+
+            request.getRequestDispatcher("index.jsp").forward(request,response);
 
         } catch (SQLException throwables) {
             throwables.printStackTrace();
