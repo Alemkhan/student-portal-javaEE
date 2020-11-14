@@ -34,7 +34,6 @@ public class ClubService {
 
         Club club = clubDAO.get(club_id);
         ArrayList<News> clubNews = clubDAO.getAllClubNews(club_id);
-
         return Response.status(Response.Status.OK).entity(club).build();
     }
 

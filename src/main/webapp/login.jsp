@@ -26,21 +26,18 @@
             event.preventDefault();
             email = $("#email").val();
             password = $("#password").val();
-            var arr = {
-                "email" : email,
-                "password" : password
-            };
+            console.log(email + " " + password);
             $.ajax({
+                url: '/login',
                 type: 'POST',
-                url: 'rest/userService/login',
-                contentType: 'application/json',
                 data: {
                     "email" : email,
                     "password" : password
                 },
+                accepts: "application/json; charset=utf-8",
                 success:
-                    function(response) {
-                        $('#addResultDiv').html(response.responseText);
+                    function() {
+                        window.location.href = "index.jsp"
                     },
                 error :
                     function(response) {
