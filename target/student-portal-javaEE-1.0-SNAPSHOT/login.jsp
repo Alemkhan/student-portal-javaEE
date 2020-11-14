@@ -44,7 +44,6 @@
                     },
                 error :
                     function(response) {
-                        console.log(response.responseText)
                         if (response.status === 404) {
                             $('#addResultDiv').html(response.responseText);
                         }

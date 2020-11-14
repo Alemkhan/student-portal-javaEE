@@ -78,8 +78,9 @@ public class UserDAO implements DAO<User>, LoginDAO<User>{
             String club_name = rs.getString("club_name");
             String description = rs.getString("description");
             String avatar = rs.getString("avatar");
+            int owner_id = rs.getInt("owner_id");
             String club_role_name = rs.getString("club_role_name");
-            Club club = new Club(club_id,club_name,description,avatar);
+            Club club = new Club(club_id,club_name,description,avatar, owner_id);
             clubMap.put(club, club_role_name);
 
         }

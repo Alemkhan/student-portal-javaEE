@@ -5,7 +5,6 @@ import Models.Event;
 import Models.News;
 import Models.User;
 
-import javax.xml.crypto.Data;
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -22,7 +21,7 @@ public class NewsDAO implements DAO<News>{
     }
 
     @Override
-    public ArrayList<News> getAll() throws SQLException {
+    public ArrayList<News> getAll() {
 
         ArrayList<News> newsList = new ArrayList<>();
 
@@ -51,18 +50,18 @@ public class NewsDAO implements DAO<News>{
     }
 
     private boolean isAllowedToChangeTheNews(User user, Club club) throws SQLException {
+
         String sql = "SELECT club_role_id FROM club_managers WHERE club_id = ? and user_id = ?";
+
         stmt = con.prepareStatement(sql);
+        stmt.setInt(1, club.getClub_id());
+        stmt.setInt(2, user.getId());
+
         resultSet = stmt.executeQuery();
         if (resultSet.next()) {
             int club_role_id = resultSet.getInt("club_role_id");
             stmt.close();
-            if (club_role_id < 3 && club_role_id > 0) {
-                return true;
-            }
-            else {
-                return false;
-            }
+            return club_role_id < 3 && club_role_id > 0;
         }
         else {
             return false;
@@ -93,7 +92,7 @@ public class NewsDAO implements DAO<News>{
         if (isAllowedToChangeTheNews(user, club)) {
             String sql = "DELETE FROM news WHERE news_id = ?";
             stmt = con.prepareStatement(sql);
-            stmt.setInt(news.getId());
+            stmt.setInt(1,  news.getId());
             boolean rowIserted = stmt.executeUpdate() > 0;
             stmt.close();
             con.close();
@@ -107,11 +106,10 @@ public class NewsDAO implements DAO<News>{
     public boolean changeNews(Club club, User user, News news) throws SQLException {
         con = DatabaseConnection.createConnection();
         if (isAllowedToChangeTheNews(user,club)) {
-            String sql = "UPDATE news SET title = ?, description = ?"; // AVATAR is in discuss !!!!!!
-            sql += " WHERE club_id = ? and news_id = ?";
+            String sql = "UPDATE news SET title = ?, description = ? WHERE club_id = ? and news_id = ?"; // AVATAR is in discuss !!!!!!
             stmt = con.prepareStatement(sql);
             stmt.setString(1, news.getTitle());
-            stmt.setString(2, news.getTitle());
+            stmt.setString(2, news.getDescription());
             stmt.setInt(3, club.getClub_id());
             stmt.setInt(4, news.getId());
             boolean rowUpdated = stmt.executeUpdate() > 0;
@@ -122,5 +120,9 @@ public class NewsDAO implements DAO<News>{
         else {
             return false;
         }
+    }
+
+    public ArrayList<News> getNewsByClubID() {
+        return null;
     }
 }

@@ -1,7 +1,7 @@
 package DAO;
 
 import Models.Club;
-import Models.User;
+import Models.News;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -18,11 +18,36 @@ public class ClubDAO implements DAO<Club>{
 
     @Override
     public Club get(int id) {
-        return null;
+
+        Club club = new Club();
+        
+        try {
+            
+            con = DatabaseConnection.createConnection();
+            sql = "select * from clubs where club_id=?";
+            stmt = con.prepareStatement(sql);
+            resultSet = stmt.executeQuery();
+            
+            if (resultSet.next()) {
+
+                int club_id = resultSet.getInt("club_id");
+                String club_name = resultSet.getString("club_name");
+                String club_description = resultSet.getString("description");
+                String club_avatar = resultSet.getString("avatar");
+                int owner_id = resultSet.getInt("owner_id");
+
+                club = new Club(club_id, club_name, club_description, club_avatar, owner_id);
+            }
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        
+        return club;
     }
 
     @Override
-    public ArrayList<Club> getAll() throws SQLException {
+    public ArrayList<Club> getAll() {
 
         ArrayList<Club> clubs = new ArrayList<>();
 
@@ -55,8 +80,7 @@ public class ClubDAO implements DAO<Club>{
         stmt.setInt(1, clubId);
         stmt.setInt(2, ownerId);
         stmt.setInt(3, 1);
-        boolean rowInserted = stmt.executeUpdate() > 0;
-        return rowInserted;
+        return stmt.executeUpdate() > 0;
     }
 
     public boolean createClub(int ownerId, Club club) throws SQLException {
@@ -75,19 +99,13 @@ public class ClubDAO implements DAO<Club>{
         boolean rowUpdated = updateClubManager(club.getClub_id(), ownerId);
         stmt.close();
         con.close();
-        if (rowInserted && rowUpdated) {
-            return true;
-        }
-        else {
-            return false;
-        }
+        return rowInserted && rowUpdated;
     }
 
     public boolean updateClub(int ownerId, Club club) throws SQLException {
-        String sql = "UPDATE clubs SET club_name = ?, description = ?"; // AVATAR is in discuss !!!!!!
-        sql += " WHERE club_id = ? and owner_id = ?";
-        con = DatabaseConnection.createConnection();
+        String sql = "UPDATE clubs SET club_name = ?, description = ? WHERE club_id = ? and owner_id = ?;"; // AVATAR is in discuss !!!!!!
 
+        con = DatabaseConnection.createConnection();
         stmt = con.prepareStatement(sql);
         stmt.setString(1, club.getClub_name());
         stmt.setString(2, club.getDescription());
@@ -97,6 +115,11 @@ public class ClubDAO implements DAO<Club>{
         stmt.close();
         con.close();
         return rowUpdated;
+    }
+
+    public ArrayList<News> getAllClubNews(int club_id) throws SQLException{
+        NewsDAO nDAO = new NewsDAO();
+        return nDAO.getNewsByClubID();
     }
 
 //      !!!! -----------   NEED TO FIX IN SQL TABLES TO ON DELETE CASCADE ------------- !!!!!

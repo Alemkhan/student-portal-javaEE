@@ -8,6 +8,9 @@ public class Club {
     private String avatar;
     private int owner_id;
 
+    public Club() {
+    }
+
     public Club(int club_id, String club_name, String description, String avatar, int owner_id) {
         this.club_id = club_id;
         this.club_name = club_name;
