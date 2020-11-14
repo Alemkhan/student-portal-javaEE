@@ -31,7 +31,7 @@ public class DashboardService {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response showContent() throws SQLException {
+    public HashMap<String, ArrayList<?>> showContent() throws SQLException {
         HashMap<String, ArrayList<?>> content = new HashMap<>();
         ArrayList<Club> allClubs = clubDAO.getAll();
         ArrayList<Event> allEvents = eventDAO.getAll();
@@ -39,7 +39,7 @@ public class DashboardService {
         content.put("clubs", allClubs);
         content.put("events", allEvents);
         content.put("news", allNews);
-        return Response.status(Response.Status.OK).entity(content).build();
+        return content;
     }
 
 }

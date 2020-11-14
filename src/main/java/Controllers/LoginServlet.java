@@ -15,11 +15,13 @@ import java.sql.SQLException;
 @WebServlet(name = "LoginServlet", value = "/login")
 public class LoginServlet extends HttpServlet {
 
+    private UserService us = new UserService();
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        UserService us = new UserService();
         String userEmail = request.getParameter("email");
         String userPassword = request.getParameter("password");
+
         try {
             User user = us.login(userEmail, userPassword);
             if (user == null) {
@@ -28,7 +30,7 @@ public class LoginServlet extends HttpServlet {
                 HttpSession userSession = request.getSession();
                 userSession.setAttribute("user", user);
                 userSession.setMaxInactiveInterval(60*15);
-                response.sendRedirect("index.jsp");
+                response.sendRedirect("/dashboard");
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
