@@ -66,13 +66,9 @@
                         Login
                     </button>
                 </div>
-
-
-
-
             </form>
 
-            <div class="login100-more" style="background-image: url('loginfolder/images/bg-01.jpg');"></div>
+            <div class="login100-more" style="background-image: url('https://bilimdinews.kz/wp-content/uploads/2019/09/d0ed5854-ef42-4c43-b30d-f45e4a82a94e.jpg');"></div>
         </div>
     </div>
 </div>
