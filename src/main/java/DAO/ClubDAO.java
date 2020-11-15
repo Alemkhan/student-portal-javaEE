@@ -106,7 +106,6 @@ public class ClubDAO implements DAO<Club>{
 
         boolean rowInserted = stmt.executeUpdate() > 0;
         boolean rowUpdated = updateClubManager(club.getClub_id(), ownerId);
-        stmt.close();
         con.close();
         return rowInserted && rowUpdated;
     }
@@ -121,7 +120,6 @@ public class ClubDAO implements DAO<Club>{
         stmt.setInt(3, club.getClub_id());
         stmt.setInt(4, ownerId);
         boolean rowUpdated = stmt.executeUpdate() > 0;
-        stmt.close();
         con.close();
         return rowUpdated;
     }

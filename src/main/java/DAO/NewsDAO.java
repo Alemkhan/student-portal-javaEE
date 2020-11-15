@@ -43,9 +43,9 @@ public class NewsDAO implements DAO<News> {
                 Club club = new Club(club_id, club_name);
                 News news = new News(news_id, news_title, news_description, publish_date, club);
                 newsList.add(news);
-                stmt.close();
-                con.close();
             }
+            con.close();
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -62,24 +62,22 @@ public class NewsDAO implements DAO<News> {
         stmt.setString(3, news.getDate().toString());
         stmt.setInt(4, club_id);
         boolean rowInserted = stmt.executeUpdate() > 0;
-        stmt.close();
         con.close();
         return rowInserted;
     }
 
-    public boolean deleteNews(int club_id, News news) throws SQLException {
+    public boolean deleteNews(int club_id, int news_id) throws SQLException {
         con = DatabaseConnection.createConnection();
         String sql = "DELETE FROM news WHERE news_id = ? AND WHERE club_id = ?";
         stmt = con.prepareStatement(sql);
-        stmt.setInt(1, news.getId());
+        stmt.setInt(1, news_id);
         stmt.setInt(2, club_id);
         boolean rowInserted = stmt.executeUpdate() > 0;
-        stmt.close();
         con.close();
         return rowInserted;
     }
 
-    public boolean changeNews(Club club, User user, News news) throws SQLException {
+    public boolean changeNews(Club club, News news) throws SQLException {
         con = DatabaseConnection.createConnection();
         String sql = "UPDATE news SET title = ?, description = ? WHERE club_id = ? and news_id = ?"; // AVATAR is in discuss !!!!!!
         stmt = con.prepareStatement(sql);
@@ -88,7 +86,6 @@ public class NewsDAO implements DAO<News> {
         stmt.setInt(3, club.getClub_id());
         stmt.setInt(4, news.getId());
         boolean rowUpdated = stmt.executeUpdate() > 0;
-        stmt.close();
         con.close();
         return rowUpdated;
     }
@@ -112,7 +109,6 @@ public class NewsDAO implements DAO<News> {
             News news = new News(news_id, news_title, news_description, publish_date, club);
             newsList.add(news);
         }
-        stmt.close();
         con.close();
         return newsList;
     }

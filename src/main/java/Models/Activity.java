@@ -17,6 +17,12 @@ public class Activity {
         this.date = date;
         this.club = club;
     }
+    public Activity(String title, String description, Date date, Club club) {
+        this.title = title;
+        this.description = description;
+        this.date = date;
+        this.club = club;
+    }
 
     public int getId() {
         return id;
