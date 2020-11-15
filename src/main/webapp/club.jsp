@@ -54,6 +54,13 @@
                                 </h3>
                                 <div class="mb-1 text-muted"><%=eventsList.get(0).getDate()%></div>
                                 <p class="card-text mb-auto"><%=eventsList.get(0).getDescription()%></p>
+                                <c:if test="${sessionScope.user.role.role_name == 'admin' ||
+                                              newsItem.getClub().getOwner().getId == sessionScope.user.id &&
+                                              sessionScope.user.id != null}">
+                                    <a href="/clubEdit?event_id=<%=eventsList.get(0).getId()%>&<%=eventsList.get(0).getClub().getClub_id()%>" class="m-3 btn-lg btn-primary">
+                                        EDIT
+                                    </a>
+                                </c:if>
                             </div>
                         </div>
                     </div>

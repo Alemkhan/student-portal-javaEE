@@ -39,7 +39,7 @@
             </li>
         </ul>
         <form class="form-inline my-2 my-lg-0">
-            <a href="profile?id=<c:out value="${sessionScope.user.id}"/>">
+            <a href="#">
                 <button class="text-lg btn btn-outline-light" type="submit"><c:out value="${sessionScope.user.first_name} ${sessionScope.user.last_name}"/></button>
             </a>
             <div class="media ml-3">

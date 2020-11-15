@@ -12,18 +12,27 @@
 </head>
 <body>
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<select id="searchCAT">
-    <option value="cc">Choose Category</option>
-    <option value="Show_All">Show All</option>
-    <option value="Show_Certain">Show Certain</option>
-    <option value="By_Group">By Group</option>
-    <option value="By_Major">By Major</option>
-    <option value="By_Year">By Year</option>
-</select>
-<input id="searchBar" disabled type="text">
-<input type="button" id="submit" value="Search">
-<div id="output">
-</div>
+<%@ include file = "components/header.jsp" %>
+<center>
+    <div class="container mt-5">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <select id="searchCAT">
+                    <option value="cc">Choose Category</option>
+                    <option value="Show_All">Show All</option>
+                    <option value="Show_Certain">Show Certain</option>
+                    <option value="By_Group">By Group</option>
+                    <option value="By_Major">By Major</option>
+                    <option value="By_Year">By Year</option>
+                </select>
+            </div>
+            <input id="searchBar" class="form-control" disabled type="text">
+            <input type="button" id="submit" value="Search">
+        </div>
+    </div>
+    <div id="output">
+    </div>
+</center>
 </body>
 <script>
     $("#searchCAT").change(function () {
@@ -36,7 +45,7 @@
                 type: 'GET',
                 dataType: "json",
                 success: function (data) {
-                    var table = $('<table>').appendTo($('#output'));
+                    var table = $('<table class="table table-bordered">').appendTo($('#output'));
                     $('<tr/>').appendTo(table)
                         .append($('<th/>').text("Student ID"))
                         .append($('<th/>').text("Student Name"))
