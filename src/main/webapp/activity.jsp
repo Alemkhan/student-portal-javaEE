@@ -12,9 +12,9 @@
 </head>
 <body>
 <%@ include file = "components/header.jsp" %>
-<div class="row">
-    <center><h1>Adding activity to <c:out value="${clubForAdd.getClub_name()}"/></h1></center>
-    <form action="">
+<center><h1>Adding activity to <c:out value="${clubForAdd.getClub_name()}"/></h1></center>
+<div class="container">
+    <form action=/addActivity" method="post">
         <p>Title</p>
         <input type="text" name="title"><br>
         <p>Description</p>
@@ -23,6 +23,7 @@
             <option value="news">News</option>
             <option value="event">Event</option>
         </select>
+        <input type="hidden" name="club_id" value="<c:out value="${clubForAdd.getClub_id()}"/>">
         <input type="submit" value="Add">
     </form>
 </div>

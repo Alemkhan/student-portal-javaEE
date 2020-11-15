@@ -17,17 +17,13 @@ import java.sql.Date;
 import java.sql.SQLException;
 import java.time.LocalDate;
 
-@WebServlet(name = "ActivityServlet", value = "/activity")
+@WebServlet(name = "ActivityServlet")
 public class ActivityServlet extends HttpServlet {
     private final ClubService cs = new ClubService();
     private final NewsDAO newsDAO = new NewsDAO();
     private final EventDAO eventDAO = new EventDAO();
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        doGet(request,response);
-    }
-
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getServletPath();
         try {
             switch (action) {
@@ -67,8 +63,11 @@ public class ActivityServlet extends HttpServlet {
             Event newEvent = new Event(title, description, localDate, club);
             eventDAO.addEvent(newEvent, club_id);
         }
-        request.getRequestDispatcher("editClub?club_id=" + club_id).forward(request,response);
-
+        request.getRequestDispatcher("activity.jsp?club_id=" + club_id).forward(request,response);
     }
 
+
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+    }
 }

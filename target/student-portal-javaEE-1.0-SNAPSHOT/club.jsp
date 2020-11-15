@@ -21,7 +21,7 @@
               newsItem.getClub().getOwner().getId == sessionScope.user.id &&
               sessionScope.user.id != null}">
     <a href="/clubEdit?club_id=<c:out value="${club.getClub_id()}"/>" class="m-3 btn-lg btn-primary">EDIT</a>
-    <a href="/addActivity?club_id=<c:out value="${club.getClub_id()}"/>" class="m-3 btn-lg btn-primary">Adding activity</a>
+    <a href="/activity?club_id=<c:out value="${club.getClub_id()}"/>" class="m-3 btn-lg btn-primary">Adding activity</a>
 
 </c:if>
 <div class="container">
