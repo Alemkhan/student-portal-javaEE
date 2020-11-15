@@ -13,6 +13,7 @@
 <body>
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <%@ include file = "components/header.jsp" %>
+
 <center>
     <div class="container mt-5">
         <div class="input-group mb-3">
@@ -120,3 +121,4 @@
     });
 </script>
 </html>
+<%--Fixed--%>
