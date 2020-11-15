@@ -10,7 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.HashSet;
 
 public class ClubDAO implements DAO<Club>{
 
@@ -64,7 +64,6 @@ public class ClubDAO implements DAO<Club>{
             stmt = con.prepareStatement(sql);
             resultSet = stmt.executeQuery();
             while (resultSet.next()){
-
                 int club_id = resultSet.getInt("club_id");
                 String club_name = resultSet.getString("club_name");
                 String club_description = resultSet.getString("description");
@@ -75,9 +74,9 @@ public class ClubDAO implements DAO<Club>{
                 owner.setId(owner_id);
                 owner.setEmail(owner_email);
                 Club club = new Club(club_id, club_name, club_description, club_avatar, owner);
-
                 clubs.add(club);
             }
+            con.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -129,38 +128,7 @@ public class ClubDAO implements DAO<Club>{
 
     public ArrayList<News> getAllClubNews(int club_id) throws SQLException{
         NewsDAO nDAO = new NewsDAO();
-        return nDAO.getNewsByClubID();
-    }
-
-    public HashMap<Club, String> getAllInfo() throws SQLException {
-        HashMap<Club, String> clubMap = new HashMap<>();
-
-        String sql = "select cm.club_id, c.club_name, c.description, c.avatar, c.owner_id, u.email, cr.club_role_name " +
-                "from club_managers cm JOIN clubs c ON cm.club_id = c.club_id " +
-                "JOIN club_roles cr ON cm.club_role_id = cr.club_role_id " +
-                "JOIN users u on c.owner_id = u.user_id ";
-
-        con = DatabaseConnection.createConnection();
-        PreparedStatement stmt1 = con.prepareStatement(sql);
-        ResultSet rs = stmt1.executeQuery();
-
-        while (rs.next()) {
-            int club_id = rs.getInt("club_id");
-            String club_name = rs.getString("club_name");
-            String description = rs.getString("description");
-            String avatar = rs.getString("avatar");
-            int owner_id = rs.getInt("owner_id");
-            String owner_email = rs.getString("email");
-            String club_role_name = rs.getString("club_role_name");
-            User owner = new Student();
-            owner.setId(owner_id);
-            owner.setEmail(owner_email);
-            Club club = new Club(club_id,club_name,description,avatar, owner);
-            clubMap.put(club, club_role_name);
-
-        }
-        con.close();
-        return clubMap;
+        return nDAO.getNewsByClubID(club_id);
     }
 
 //      !!!! -----------   NEED TO FIX IN SQL TABLES TO ON DELETE CASCADE ------------- !!!!!
