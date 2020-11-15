@@ -16,7 +16,7 @@
 <body class="bg-light">
 <%@ include file = "components/header.jsp" %>
 <!--FRONT PLEASE-->
-
+<%--qweryy--%>
 <c:if test="${sessionScope.user.role.role_name == 'admin' ||
               newsItem.getClub().getOwner().getId == sessionScope.user.id &&
               sessionScope.user.id != null}">
