@@ -27,7 +27,8 @@ public class NewsDAO implements DAO<News>{
 
         try {
             con = DatabaseConnection.createConnection();
-            sql = "select * from news";
+            sql = "select n.news_id, n.title, n.description, n.publish_date, n.club_id, c.club_name " +
+                    "from news n JOIN clubs c WHERE n.club_id = c.club_id";
             stmt = con.prepareStatement(sql);
             resultSet = stmt.executeQuery();
             while (resultSet.next()){
@@ -37,7 +38,8 @@ public class NewsDAO implements DAO<News>{
                 String news_description = resultSet.getString("description");
                 Date publish_date = resultSet.getDate("publish_date");
                 int club_id = resultSet.getInt("club_id");
-                Club club = new Club(club_id);
+                String club_name = resultSet.getString("club_name");
+                Club club = new Club(club_id, club_name);
                 News news = new News(news_id,news_title,news_description, publish_date, club);
 
                 newsList.add(news);

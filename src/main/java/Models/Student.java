@@ -13,6 +13,10 @@ public class Student extends User {
         this.clubs = studentClubs;
     }
 
+    public Student() {
+
+    }
+
     public Major getMajor() {
         return major;
     }
