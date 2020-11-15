@@ -16,7 +16,25 @@ public class EventDAO implements DAO<Event>{
     private ResultSet resultSet;
 
     @Override
-    public Event get(int id) {
+    public Event get(int id) throws SQLException {
+        con = DatabaseConnection.createConnection();
+        sql = "select e.event_id, e.title, e.description, e.event_date, e.club_id, c.club_name " +
+                "from events e JOIN clubs c WHERE e.club_id = c.club_id and e.event_id = ?";
+        stmt = con.prepareStatement(sql);
+        stmt.setInt(1, id);
+        resultSet = stmt.executeQuery();
+        if (resultSet.next()) {
+            int event_id = resultSet.getInt("event_id");
+            String event_title = resultSet.getString("title");
+            String event_description = resultSet.getString("description");
+            Date event_date = resultSet.getDate("event_date");
+            int club_id = resultSet.getInt("club_id");
+            String club_name = resultSet.getString("club_name");
+            Club club = new Club(club_id, club_name);
+            Event event = new Event(event_id,event_title,event_description,event_date,club);
+            con.close();
+            return event;
+        }
         return null;
     }
 
@@ -94,6 +112,19 @@ public class EventDAO implements DAO<Event>{
         stmt.setDate(3, (Date) event.getDate());
         stmt.setInt(4, club_id);
         stmt.setInt(5, event.getId());
+        boolean rowInserted = stmt.executeUpdate() > 0;
+        con.close();
+        return rowInserted;
+    }
+
+    public boolean addEvent(Event event, int club_id) throws SQLException {
+        con = DatabaseConnection.createConnection();
+        String sql = "INSERT INTO events(title, description, event_date, club_id) VALUES (?,?,?,?)";
+        stmt = con.prepareStatement(sql);
+        stmt.setString(1, event.getTitle());
+        stmt.setString(2, event.getDescription());
+        stmt.setDate(3, (Date) event.getDate());
+        stmt.setInt(4, club_id);
         boolean rowInserted = stmt.executeUpdate() > 0;
         con.close();
         return rowInserted;

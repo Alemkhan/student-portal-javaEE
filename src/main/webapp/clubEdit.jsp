@@ -32,9 +32,33 @@
                     <td><c:out value="${event.getTitle()}" /></td>
                     <td><c:out value="${event.getDescription()}" /></td>
                     <td><c:out value="${event.getDate()}" /></td>
-                    <td><a id="edit" href="/clubEdit?club_id=<c:out value='${clubForEdit.getClub_id()}'/>&event_id=<c:out value='${event.getId()}' />">Edit</a></td>
-                    <td><a id="delete" onclick="deleteUser(<c:out value='${clubForEdit.getClub_id()}'/>, <c:out value='${event.getId()}' />)" href="/clubEdit?club_id=<c:out value='${clubForEdit.getClub_id()}'/>&event_id=<c:out value='${event.getId()}' />">Delete</a></td>
-                    <input id="club_id" type="hidden" value="<c:out value='${clubForEdit.getClub_id()}'/>">
+                    <td><a id="edit" href="/editEvent?event_id=<c:out value='${event.getId()}'/>">Edit</a></td>
+                    <td><a id="delete" href="#" onclick="deleteUser(<c:out value='${clubForEdit.getClub_id()}'/>, <c:out value='${event.getId()}' />)">Delete</a></td>
+                </tr>
+            </c:forEach>
+        </table>
+    </div>
+    <center><h1>List of News</h1></center><br>
+    <div class="row mt-3">
+        <div class="result"></div>
+        <table border="1" cellpadding="5">
+            <tr>
+                <th>News ID</th>
+                <th>News Title</th>
+                <th>News Description</th>
+                <th>Publish Date</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+            <c:forEach var="news" items="${clubForEdit.getNewsList()}">
+                <tr>
+                    <td><c:out value="${news.getId()}" /></td>
+                    <td><c:out value="${news.getTitle()}" /></td>
+                    <td><c:out value="${news.getDescription()}" /></td>
+                    <td><c:out value="${news.getDate()}" /></td>
+                    <td><a href="/editNews?news_id=<c:out value='${news.getId()}' />">Edit</a></td>
+                    <td><a href="#" onclick="deleteNews(<c:out value='${clubForEdit.getClub_id()}'/>, <c:out value='${news.getId()}' />)">Delete</a></td>
+                    <input type="hidden" name="event_id" value="<c:out value='${clubForEdit.getClub_id()}'/>">
                 </tr>
             </c:forEach>
         </table>
@@ -42,6 +66,22 @@
 </div>
 </body>
 <script>
+
+    function deleteNews(club_id, news_id){
+        event.preventDefault();
+        $.ajax({
+            url: "/clubEdit",
+            type: "GET",
+            data: {
+                action : "deleteNews",
+                club_id : club_id,
+                news_id : news_id
+            },
+            success: function (response) {
+                location.reload();
+            }
+        });
+    };
 
     function deleteUser(club_id, event_id){
         event.preventDefault();
