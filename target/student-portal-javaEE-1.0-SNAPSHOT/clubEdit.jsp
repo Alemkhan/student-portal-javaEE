@@ -30,8 +30,8 @@
                     <td><c:out value="${event.getTitle()}" /></td>
                     <td><c:out value="${event.getDescription()}" /></td>
                     <td><c:out value="${event.getDate()}" /></td>
-                    <td><a href="/editEvent?club_id=<c:out value='${clubForEdit.getId()}' />&event_id=<c:out value='${event.getId()}' />">Edit</a></td>
-                    <td><a href="/deleteEvent?event_id=<c:out value='${book.getId()}' />">Delete</a></td>
+                    <td><a href="/editEvent?club_id=<c:out value='${clubForEdit.getClub_id()}'/>&event_id=<c:out value='${event.getId()}' />">Edit</a></td>
+                    <td><a href="/deleteEvent?event_id=<c:out value='${event.getId()}' />">Delete</a></td>
                 </tr>
             </c:forEach>
         </table>
