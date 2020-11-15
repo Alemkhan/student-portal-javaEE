@@ -45,6 +45,6 @@ public class DeleteClubServlet extends HttpServlet {
     private void removeClub(HttpServletRequest request,HttpServletResponse response) throws SQLException, ServletException, IOException {
         int clubId = Integer.parseInt(request.getParameter("club_id"));
         clubDAO.deleteClub(clubId);
-        request.getRequestDispatcher("index.jsp").forward(request,response);
+        response.sendRedirect("/dashboard");
     }
 }
