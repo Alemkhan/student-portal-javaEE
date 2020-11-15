@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: alemh
@@ -36,21 +37,22 @@
     <!--===============================================================================================-->
 </head>
 <body>
-<div id="addResultDiv" style="color: red">
-    <%
-        if(request.getAttribute("messageResponse")!=null){
-            out.println(request.getAttribute("messageResponse"));
-            request.setAttribute("messageResponse",null);
-        }
-    %>
-</div>
 <div class="limiter">
     <div class="container-login100">
         <div class="wrap-login100">
             <form class="login100-form validate-form" id="userForm" action="/login" method="post">
-					<span class="login100-form-title p-b-34">
+
+
+                <span class="login100-form-title p-b-34">
 						Account Login
-					</span>
+				</span>
+
+                <c:if test="${requestScope.messageResponse != null}">
+                    <span class="login100-form-title p-b-34" style="color:red">
+                        <c:out value="${requestScope.messageResponse}"/>
+                        <%request.setAttribute("messageResponse", null);%>
+				    </span>
+                </c:if>
 
                 <div class="wrap-input100 rs1-wrap-input100 validate-input m-b-20" data-validate="Type user name">
                     <input id="first-name" class="input100" type="text" name="email" placeholder="User name">

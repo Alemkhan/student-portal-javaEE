@@ -7,8 +7,9 @@ import Models.User;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 
-public class NewsDAO implements DAO<News>{
+public class NewsDAO implements DAO<News> {
 
     private Connection con;
     private String sql;
@@ -31,7 +32,7 @@ public class NewsDAO implements DAO<News>{
                     "from news n JOIN clubs c WHERE n.club_id = c.club_id";
             stmt = con.prepareStatement(sql);
             resultSet = stmt.executeQuery();
-            while (resultSet.next()){
+            while (resultSet.next()) {
 
                 int news_id = resultSet.getInt("news_id");
                 String news_title = resultSet.getString("title");
@@ -40,14 +41,14 @@ public class NewsDAO implements DAO<News>{
                 int club_id = resultSet.getInt("club_id");
                 String club_name = resultSet.getString("club_name");
                 Club club = new Club(club_id, club_name);
-                News news = new News(news_id,news_title,news_description, publish_date, club);
-
+                News news = new News(news_id, news_title, news_description, publish_date, club);
                 newsList.add(news);
+                stmt.close();
+                con.close();
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
         return newsList;
     }
 
@@ -64,8 +65,7 @@ public class NewsDAO implements DAO<News>{
             int club_role_id = resultSet.getInt("club_role_id");
             stmt.close();
             return club_role_id < 3 && club_role_id > 0;
-        }
-        else {
+        } else {
             return false;
         }
     }
@@ -83,8 +83,7 @@ public class NewsDAO implements DAO<News>{
             stmt.close();
             con.close();
             return rowInserted;
-        }
-        else {
+        } else {
             return false;
         }
     }
@@ -94,20 +93,19 @@ public class NewsDAO implements DAO<News>{
         if (isAllowedToChangeTheNews(user, club)) {
             String sql = "DELETE FROM news WHERE news_id = ?";
             stmt = con.prepareStatement(sql);
-            stmt.setInt(1,  news.getId());
+            stmt.setInt(1, news.getId());
             boolean rowIserted = stmt.executeUpdate() > 0;
             stmt.close();
             con.close();
             return rowIserted;
-        }
-        else {
+        } else {
             return false;
         }
     }
 
     public boolean changeNews(Club club, User user, News news) throws SQLException {
         con = DatabaseConnection.createConnection();
-        if (isAllowedToChangeTheNews(user,club)) {
+        if (isAllowedToChangeTheNews(user, club)) {
             String sql = "UPDATE news SET title = ?, description = ? WHERE club_id = ? and news_id = ?"; // AVATAR is in discuss !!!!!!
             stmt = con.prepareStatement(sql);
             stmt.setString(1, news.getTitle());
@@ -118,13 +116,32 @@ public class NewsDAO implements DAO<News>{
             stmt.close();
             con.close();
             return rowUpdated;
-        }
-        else {
+        } else {
             return false;
         }
     }
 
-    public ArrayList<News> getNewsByClubID() {
-        return null;
+    public ArrayList<News> getNewsByClubID(int club_id) throws SQLException {
+        ArrayList<News> newsList = new ArrayList<>();
+        sql = "select n.news_id, n.title, n.description, n.publish_date, n.club_id, c.club_name" +
+                " from news n JOIN clubs c WHERE n.club_id = c.club_id and n.club_id = ?";
+        con = DatabaseConnection.createConnection();
+        stmt = con.prepareStatement(sql);
+        stmt.setInt(1, club_id);
+        resultSet = stmt.executeQuery();
+        while (resultSet.next()) {
+            int news_id = resultSet.getInt("news_id");
+            String news_title = resultSet.getString("title");
+            String news_description = resultSet.getString("description");
+            Date publish_date = resultSet.getDate("publish_date");
+            int clubId = resultSet.getInt("club_id");
+            String club_name = resultSet.getString("club_name");
+            Club club = new Club(clubId, club_name);
+            News news = new News(news_id, news_title, news_description, publish_date, club);
+            newsList.add(news);
+        }
+        stmt.close();
+        con.close();
+        return newsList;
     }
 }

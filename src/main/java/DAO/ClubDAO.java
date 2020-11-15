@@ -10,6 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashSet;
 
 public class ClubDAO implements DAO<Club>{
 
@@ -63,7 +64,6 @@ public class ClubDAO implements DAO<Club>{
             stmt = con.prepareStatement(sql);
             resultSet = stmt.executeQuery();
             while (resultSet.next()){
-
                 int club_id = resultSet.getInt("club_id");
                 String club_name = resultSet.getString("club_name");
                 String club_description = resultSet.getString("description");
@@ -74,9 +74,9 @@ public class ClubDAO implements DAO<Club>{
                 owner.setId(owner_id);
                 owner.setEmail(owner_email);
                 Club club = new Club(club_id, club_name, club_description, club_avatar, owner);
-
                 clubs.add(club);
             }
+            con.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -128,7 +128,7 @@ public class ClubDAO implements DAO<Club>{
 
     public ArrayList<News> getAllClubNews(int club_id) throws SQLException{
         NewsDAO nDAO = new NewsDAO();
-        return nDAO.getNewsByClubID();
+        return nDAO.getNewsByClubID(club_id);
     }
 
 //      !!!! -----------   NEED TO FIX IN SQL TABLES TO ON DELETE CASCADE ------------- !!!!!

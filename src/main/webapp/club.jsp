@@ -30,8 +30,8 @@
         </div>
     </div>
     <% Club club = (Club) request.getAttribute("club");
-        ArrayList<Event> eventsList = club.getEventsList();
-        if (!eventsList.isEmpty()) { %>
+    ArrayList<Event> eventsList = club.getEventsList();
+    if (!eventsList.isEmpty()) { %>
     <!---Carousel of Events--->
     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
@@ -82,33 +82,32 @@
             <span class="sr-only">Previous</span>
         </a>
         <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-            <
-            span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
             <span class="sr-only">Next</span>
         </a>
     </div>
     <%}%>
 
     <!---Creators--->
-    <%--    <div class="container marketing bg-white m-3 border-1">--%>
-    <%--        <div class="row p-4">--%>
-    <%--            <div class="col-lg-4">--%>
-    <%--                <img class="rounded-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="140" height="140">--%>
-    <%--                <h2 class="p-2">Heading</h2>--%>
-    <%--                <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>--%>
-    <%--            </div>--%>
-    <%--            <div class="col-lg-4">--%>
-    <%--                <img class="rounded-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="140" height="140">--%>
-    <%--                <h2 class="p-2">Heading</h2>--%>
-    <%--                <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>--%>
-    <%--            </div>--%>
-    <%--            <div class="col-lg-4">--%>
-    <%--                <img class="rounded-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="140" height="140">--%>
-    <%--                <h2 class="p-2">Heading</h2>--%>
-    <%--                <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>--%>
-    <%--            </div>--%>
-    <%--        </div>--%>
-    <%--    </div>--%>
+<%--    <div class="container marketing bg-white m-3 border-1">--%>
+<%--        <div class="row p-4">--%>
+<%--            <div class="col-lg-4">--%>
+<%--                <img class="rounded-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="140" height="140">--%>
+<%--                <h2 class="p-2">Heading</h2>--%>
+<%--                <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>--%>
+<%--            </div>--%>
+<%--            <div class="col-lg-4">--%>
+<%--                <img class="rounded-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="140" height="140">--%>
+<%--                <h2 class="p-2">Heading</h2>--%>
+<%--                <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>--%>
+<%--            </div>--%>
+<%--            <div class="col-lg-4">--%>
+<%--                <img class="rounded-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="140" height="140">--%>
+<%--                <h2 class="p-2">Heading</h2>--%>
+<%--                <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>--%>
+<%--            </div>--%>
+<%--        </div>--%>
+<%--    </div>--%>
 
     <!---NEWS--->
     <div class="row m-3 text-dark bg-white">
@@ -117,11 +116,11 @@
                 News of <c:out value="${club.getClub_name()}"/>
             </h3>
             <c:forEach var="clubNews" items="${club.getNewsList()}">
-                <div class="blog-post">
-                    <h2 class="blog-post-title"><c:out value="${clubNews.getTitle()}"/></h2>
-                    <p class="blog-post-meta text-primary"><c:out value="${clubNews.getDate()}"/></p>
-                    <p><c:out value="${clubNews.getDescription()}"/></p>
-                </div>
+            <div class="blog-post">
+                <h2 class="blog-post-title"><c:out value="${clubNews.getTitle()}"/></h2>
+                <p class="blog-post-meta text-primary"><c:out value="${clubNews.getDate()}"/></p>
+                <p><c:out value="${clubNews.getDescription()}"/></p>
+            </div>
                 <hr>
             </c:forEach>
         </div>
