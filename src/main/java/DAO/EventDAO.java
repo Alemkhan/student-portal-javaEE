@@ -41,7 +41,6 @@ public class EventDAO implements DAO<Event>{
                 club.setClub_id(club_id);
                 Event event = new Event(event_id, event_title, event_description,event_date, club);
                 events.add(event);
-
             }
             con.close();
         } catch (SQLException e) {
@@ -86,14 +85,26 @@ public class EventDAO implements DAO<Event>{
     }
 
     public boolean editEvent(int club_id,Event event) throws SQLException {
-        String sql = "UPDATE events SET title = ?,description = ?, event_date = ? WHERE club_id = ? and event_id = ?";
+        String sql = "UPDATE events SET title = ?,description = ? WHERE club_id = ? and event_id = ?";
         con = DatabaseConnection.createConnection();
+        stmt = con.prepareStatement(sql);
+        stmt.setString(1, event.getTitle());
+        stmt.setString(2, event.getDescription());
+        stmt.setInt(3, club_id);
+        stmt.setInt(4, event.getId());
+        boolean rowInserted = stmt.executeUpdate() > 0;
+        con.close();
+        return rowInserted;
+    }
+
+    public boolean addEvent(Event event, int club_id) throws SQLException {
+        con = DatabaseConnection.createConnection();
+        String sql = "INSERT INTO events(title, description, event_date, club_id) VALUES (?,?,?,?)";
         stmt = con.prepareStatement(sql);
         stmt.setString(1, event.getTitle());
         stmt.setString(2, event.getDescription());
         stmt.setDate(3, (Date) event.getDate());
         stmt.setInt(4, club_id);
-        stmt.setInt(5, event.getId());
         boolean rowInserted = stmt.executeUpdate() > 0;
         con.close();
         return rowInserted;
