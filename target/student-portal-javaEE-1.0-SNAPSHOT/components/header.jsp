@@ -42,9 +42,17 @@
             <a href="#">
                 <button class="text-lg btn btn-outline-light" type="submit"><c:out value="${sessionScope.user.first_name} ${sessionScope.user.last_name}"/></button>
             </a>
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <div class="btn-nav">
+                        <a href="/logout" class="btn btn-outline-light my-2 my-sm-0">Logout</a>
+                    </div>
+                </li>
+            </ul>
             <div class="media ml-3">
                 <img src="https://www.meme-arsenal.com/memes/4755e2d723dc73f9757832eff0992707.jpg" style="height: 64px; width: 64px; border-radius: 50%" class="mr-3" alt="...">
             </div>
+
         </form>
     </div>
 </nav>

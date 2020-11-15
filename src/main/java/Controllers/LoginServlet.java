@@ -5,12 +5,11 @@ import Services.UserService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.*;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.util.Date;
 
 @WebServlet(name = "LoginServlet", value = "/login")
 public class LoginServlet extends HttpServlet {
@@ -32,6 +31,10 @@ public class LoginServlet extends HttpServlet {
                 HttpSession userSession = request.getSession();
                 userSession.setAttribute("user", user);
                 userSession.setMaxInactiveInterval(60*15);
+                int i = (int) (new Date().getTime()/1000);
+                String time = Integer.toString(i);
+                Cookie cookie = new Cookie("time",time);
+                response.addCookie(cookie);
                 response.sendRedirect("/dashboard");
             }
         } catch (SQLException throwables) {
