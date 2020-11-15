@@ -18,6 +18,13 @@ public class Activity {
         this.club = club;
     }
 
+    public Activity(String event_title, String event_description, java.sql.Date localDate, Club club) {
+        this.title = title;
+        this.description = description;
+        this.date = date;
+        this.club = club;
+    }
+
     public int getId() {
         return id;
     }

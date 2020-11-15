@@ -8,6 +8,10 @@ public class Event extends Activity implements Comparable<Event>{
         super(id, title, description, date, club);
     }
 
+    public Event(String event_title, String event_description, java.sql.Date localDate, Club club) {
+        super(event_title,event_description,localDate,club);
+    }
+
     @Override
     public int compareTo(Event o) {
         return o.getDate().compareTo(this.getDate());

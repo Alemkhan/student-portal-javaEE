@@ -98,4 +98,17 @@ public class EventDAO implements DAO<Event>{
         con.close();
         return rowInserted;
     }
+
+    public boolean addEvent(Event event, int club_id) throws SQLException {
+        con = DatabaseConnection.createConnection();
+        String sql = "INSERT INTO events(title, description, event_date, club_id) VALUES (?,?,?,?)";
+        stmt = con.prepareStatement(sql);
+        stmt.setString(1, event.getTitle());
+        stmt.setString(2, event.getDescription());
+        stmt.setDate(3, (Date) event.getDate());
+        stmt.setInt(4, club_id);
+        boolean rowInserted = stmt.executeUpdate() > 0;
+        con.close();
+        return rowInserted;
+    }
 }
