@@ -44,7 +44,7 @@
                 sessionScope.user.id != null}">
                     <a href="#">Edit</a>
                 </c:if>
-                <!---IMAGE--->
+                <!---IMAGE1--->
             </div>
         </c:forEach>
     </div>

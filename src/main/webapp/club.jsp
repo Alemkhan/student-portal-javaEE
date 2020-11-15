@@ -109,7 +109,7 @@
 <%--        </div>--%>
 <%--    </div>--%>
 
-    <!---NEWS--->
+    <!---NEWSS--->
     <div class="row m-3 text-dark bg-white">
         <div class="col-md-8 blog-main p-3">
             <h3 class="pb-3 mb-4 font-italic border-bottom">
