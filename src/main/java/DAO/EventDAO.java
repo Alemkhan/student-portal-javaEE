@@ -41,9 +41,9 @@ public class EventDAO implements DAO<Event>{
                 club.setClub_id(club_id);
                 Event event = new Event(event_id, event_title, event_description,event_date, club);
                 events.add(event);
-                stmt.close();
-                con.close();
+
             }
+            con.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -70,7 +70,6 @@ public class EventDAO implements DAO<Event>{
             Event event = new Event(event_id, event_title, event_description, publish_date, club);
             events.add(event);
         }
-        stmt.close();
         con.close();
         return events;
     }
@@ -82,7 +81,6 @@ public class EventDAO implements DAO<Event>{
         stmt.setInt(1, event_id);
         stmt.setInt(2, club_id);
         boolean rowInserted = stmt.executeUpdate() > 0;
-        stmt.close();
         con.close();
         return rowInserted;
     }
@@ -97,7 +95,6 @@ public class EventDAO implements DAO<Event>{
         stmt.setInt(4, club_id);
         stmt.setInt(5, event.getId());
         boolean rowInserted = stmt.executeUpdate() > 0;
-        stmt.close();
         con.close();
         return rowInserted;
     }
