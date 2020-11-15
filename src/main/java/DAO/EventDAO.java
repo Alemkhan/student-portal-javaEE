@@ -77,5 +77,28 @@ public class EventDAO implements DAO<Event>{
 
     public boolean deleteEvent(int event_id, int club_id) throws SQLException {
         String sql = "DELETE FROM events WHERE event_id = ? and club_id = ?";
+        con = DatabaseConnection.createConnection();
+        stmt = con.prepareStatement(sql);
+        stmt.setInt(1, event_id);
+        stmt.setInt(2, club_id);
+        boolean rowInserted = stmt.executeUpdate() > 0;
+        stmt.close();
+        con.close();
+        return rowInserted;
+    }
+
+    public boolean editEvent(int club_id,Event event) throws SQLException {
+        String sql = "UPDATE events SET title = ?,description = ?, event_date = ? WHERE club_id = ? and event_id = ?";
+        con = DatabaseConnection.createConnection();
+        stmt = con.prepareStatement(sql);
+        stmt.setString(1, event.getTitle());
+        stmt.setString(2, event.getDescription());
+        stmt.setDate(3, (Date) event.getDate());
+        stmt.setInt(4, club_id);
+        stmt.setInt(5, event.getId());
+        boolean rowInserted = stmt.executeUpdate() > 0;
+        stmt.close();
+        con.close();
+        return rowInserted;
     }
 }

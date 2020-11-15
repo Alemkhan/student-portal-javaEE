@@ -51,6 +51,9 @@ public class Club {
         this.club_id = club_id;
         this.club_name = club_name;
     }
+    public Club(int club_id) {
+        this.club_id = club_id;
+    }
 
     public int getClub_id() {
         return club_id;
