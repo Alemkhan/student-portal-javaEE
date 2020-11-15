@@ -16,20 +16,17 @@ public class ClubServlet extends HttpServlet {
 
     private final ClubService cs = new ClubService();
 
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-
 
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         try {
-
             Club clubBody = cs.getClub(Integer.parseInt(request.getParameter("id")));
             request.setAttribute("club", clubBody);
             request.getRequestDispatcher("club.jsp").forward(request,response);
-
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }

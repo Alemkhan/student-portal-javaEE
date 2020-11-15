@@ -40,7 +40,8 @@
                 <hr class="my-4">
                 <p><c:out value="${newsItem.getDate()}"/> by <c:out value="${newsItem.getClub().getClub_name()}"/></p>
                 <c:if test="${sessionScope.user.role.role_name == 'admin' ||
-                newsItem.getClub().getOwner().getId == sessionScope.user.id}">
+                newsItem.getClub().getOwner().getId == sessionScope.user.id &&
+                sessionScope.user.id != null}">
                     <a href="#">Edit</a>
                 </c:if>
                 <!---IMAGE--->
