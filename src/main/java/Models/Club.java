@@ -1,5 +1,7 @@
 package Models;
 
+import java.util.ArrayList;
+
 public class Club {
 
     private int club_id;
@@ -7,6 +9,25 @@ public class Club {
     private String description;
     private String avatar;
     private User owner;
+
+    private ArrayList<News> newsList;
+    private ArrayList<Event> eventsList;
+
+    public ArrayList<News> getNewsList() {
+        return newsList;
+    }
+
+    public void setNewsList(ArrayList<News> newsList) {
+        this.newsList = newsList;
+    }
+
+    public ArrayList<Event> getEventsList() {
+        return eventsList;
+    }
+
+    public void setEventsList(ArrayList<Event> eventsList) {
+        this.eventsList = eventsList;
+    }
 
     public Club() {
     }
