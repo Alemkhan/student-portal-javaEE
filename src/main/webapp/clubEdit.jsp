@@ -43,11 +43,8 @@
 </body>
 <script>
 
-    $("#edit").click(function () {
-
-    });
-
     function deleteUser(club_id, event_id){
+        event.preventDefault();
         $.ajax({
             url: "/clubEdit",
             type: "GET",
@@ -56,8 +53,8 @@
                 club_id : club_id,
                 event_id : event_id
             },
-            success: function (data) {
-                $(".result").html("Success");
+            success: function (response) {
+                location.reload();
             }
         });
     };

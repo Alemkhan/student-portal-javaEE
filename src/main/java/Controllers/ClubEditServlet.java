@@ -48,8 +48,9 @@ public class ClubEditServlet extends HttpServlet {
                         list(request, response);
                         break;
                 }
+            } else {
+                list(request, response);
             }
-            list(request, response);
         } catch (SQLException ex) {
             throw new ServletException(ex);
         }
