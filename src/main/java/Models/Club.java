@@ -40,6 +40,13 @@ public class Club {
         this.owner = owner;
     }
 
+    public Club(String club_name, String description, String avatar, User owner) {
+        this.club_name = club_name;
+        this.description = description;
+        this.avatar = avatar;
+        this.owner = owner;
+    }
+
     public Club(String club_name, String description, String avatar) {
         this.club_name = club_name;
         this.description = description;

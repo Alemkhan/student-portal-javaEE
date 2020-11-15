@@ -22,7 +22,6 @@
               sessionScope.user.id != null}">
     <a href="/clubEdit?club_id=<c:out value="${club.getClub_id()}"/>" class="m-3 btn-lg btn-primary">EDIT</a>
     <a href="/activity?club_id=<c:out value="${club.getClub_id()}"/>" class="m-3 btn-lg btn-primary">Adding activity</a>
-
 </c:if>
 <div class="container">
     <div class="jumbotron p-3 p-md-5 text-dark rounded bg-white m-3 border">
@@ -59,9 +58,6 @@
                                 <c:if test="${sessionScope.user.role.role_name == 'admin' ||
                                               newsItem.getClub().getOwner().getId == sessionScope.user.id &&
                                               sessionScope.user.id != null}">
-                                    <a href="/clubEdit?event_id=<%=eventsList.get(0).getId()%>&<%=eventsList.get(0).getClub().getClub_id()%>" class="m-3 btn-lg btn-primary">
-                                        EDIT
-                                    </a>
                                 </c:if>
                             </div>
                         </div>

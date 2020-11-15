@@ -12,7 +12,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashSet;
 
-public class ClubDAO implements DAO<Club>{
+public class ClubDAO implements DAO<Club> {
 
     private Connection con;
     private String sql;
@@ -23,15 +23,15 @@ public class ClubDAO implements DAO<Club>{
     public Club get(int id) {
 
         Club club = new Club();
-        
+
         try {
-            
+
             con = DatabaseConnection.createConnection();
             sql = "select c.*, u.email from clubs c JOIN users u ON c.owner_id = u.user_id where club_id=?";
             stmt = con.prepareStatement(sql);
             stmt.setInt(1, id);
             resultSet = stmt.executeQuery();
-            
+
             if (resultSet.next()) {
 
                 int club_id = resultSet.getInt("club_id");
@@ -45,11 +45,11 @@ public class ClubDAO implements DAO<Club>{
                 owner.setEmail(owner_email);
                 club = new Club(club_id, club_name, club_description, club_avatar, owner);
             }
-            
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        
+
         return club;
     }
 
@@ -63,7 +63,7 @@ public class ClubDAO implements DAO<Club>{
             sql = "select c.*, u.email from clubs c JOIN users u ON c.owner_id = u.user_id";
             stmt = con.prepareStatement(sql);
             resultSet = stmt.executeQuery();
-            while (resultSet.next()){
+            while (resultSet.next()) {
                 int club_id = resultSet.getInt("club_id");
                 String club_name = resultSet.getString("club_name");
                 String club_description = resultSet.getString("description");
@@ -124,28 +124,22 @@ public class ClubDAO implements DAO<Club>{
         return rowUpdated;
     }
 
-    public ArrayList<News> getAllClubNews(int club_id) throws SQLException{
+    public ArrayList<News> getAllClubNews(int club_id) throws SQLException {
         NewsDAO nDAO = new NewsDAO();
         return nDAO.getNewsByClubID(club_id);
     }
 
-//      !!!! -----------   NEED TO FIX IN SQL TABLES TO ON DELETE CASCADE ------------- !!!!!
-//    public boolean deleteClub(Club club, User user) throws SQLException {
-//        if (user.getRole().getRole_id() == 1) {
-//            String sql = "DELETE FROM clubs, club_managers, events, news where club_id = ?";
-//
-//            con = DatabaseConnection.createConnection();
-//
-//            stmt = con.prepareStatement(sql);
-//            stmt = setInt(1, club.getClub_id());
-//
-//            boolean rowDeleted = stmt.executeUpdate() > 0;
-//            stmt = close();
-//            con.close();
-//            return rowDeleted;
-//        }
-//        else {
-//            return false;
-//        }
-//    }
+    public boolean deleteClub(int club_id) throws SQLException {
+        String sql = "DELETE FROM clubs where club_id = ?";
+
+        con = DatabaseConnection.createConnection();
+        stmt = con.prepareStatement(sql);
+        stmt.setInt(1,club_id);
+        boolean rowDeleted = stmt.executeUpdate() > 0;
+        con.close();
+        return rowDeleted;
+    }
 }
+
+
+

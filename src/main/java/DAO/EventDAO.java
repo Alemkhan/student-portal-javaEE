@@ -16,7 +16,25 @@ public class EventDAO implements DAO<Event>{
     private ResultSet resultSet;
 
     @Override
-    public Event get(int id) {
+    public Event get(int id) throws SQLException {
+        con = DatabaseConnection.createConnection();
+        sql = "select e.event_id, e.title, e.description, e.event_date, e.club_id, c.club_name " +
+                "from events e JOIN clubs c WHERE e.club_id = c.club_id and e.event_id = ?";
+        stmt = con.prepareStatement(sql);
+        stmt.setInt(1, id);
+        resultSet = stmt.executeQuery();
+        if (resultSet.next()) {
+            int event_id = resultSet.getInt("event_id");
+            String event_title = resultSet.getString("title");
+            String event_description = resultSet.getString("description");
+            Date event_date = resultSet.getDate("event_date");
+            int club_id = resultSet.getInt("club_id");
+            String club_name = resultSet.getString("club_name");
+            Club club = new Club(club_id, club_name);
+            Event event = new Event(event_id,event_title,event_description,event_date,club);
+            con.close();
+            return event;
+        }
         return null;
     }
 

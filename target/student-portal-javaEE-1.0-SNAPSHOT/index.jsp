@@ -29,7 +29,8 @@
                 <c:out value="${club.getClub_name()}"/>
             </a>
         </c:forEach>
-
+        <a href="addClubForm.jsp" class="list-group-item list-group-item-action">Create Club</a>
+        <a href="/deleteClub" class="list-group-item list-group-item-action">Delete Clubs</a>
     </div>
 
     <div class="col-7">

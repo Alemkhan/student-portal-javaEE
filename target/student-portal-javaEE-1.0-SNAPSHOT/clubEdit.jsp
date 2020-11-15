@@ -32,7 +32,7 @@
                     <td><c:out value="${event.getTitle()}" /></td>
                     <td><c:out value="${event.getDescription()}" /></td>
                     <td><c:out value="${event.getDate()}" /></td>
-                    <td><a id="edit" href="/clubEdit?club_id=<c:out value='${clubForEdit.getClub_id()}'/>&event_id=<c:out value='${event.getId()}' />">Edit</a></td>
+                    <td><a id="edit" href="/editEvent?event_id=<c:out value='${event.getId()}'/>">Edit</a></td>
                     <td><a id="delete" href="#" onclick="deleteUser(<c:out value='${clubForEdit.getClub_id()}'/>, <c:out value='${event.getId()}' />)">Delete</a></td>
                 </tr>
             </c:forEach>
@@ -56,9 +56,9 @@
                     <td><c:out value="${news.getTitle()}" /></td>
                     <td><c:out value="${news.getDescription()}" /></td>
                     <td><c:out value="${news.getDate()}" /></td>
-                    <td><a  href="/clubEdit?club_id=<c:out value='${clubForEdit.getClub_id()}'/>&event_id=<c:out value='${event.getId()}' />">Edit</a></td>
+                    <td><a href="/editNews?news_id=<c:out value='${news.getId()}' />">Edit</a></td>
                     <td><a href="#" onclick="deleteNews(<c:out value='${clubForEdit.getClub_id()}'/>, <c:out value='${news.getId()}' />)">Delete</a></td>
-                    <input  type="hidden" value="<c:out value='${clubForEdit.getClub_id()}'/>">
+                    <input type="hidden" name="event_id" value="<c:out value='${clubForEdit.getClub_id()}'/>">
                 </tr>
             </c:forEach>
         </table>

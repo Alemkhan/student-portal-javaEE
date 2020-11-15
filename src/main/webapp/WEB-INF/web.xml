@@ -42,5 +42,35 @@
         <url-pattern>/activity</url-pattern>
         <url-pattern>/addActivity</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>EditServlet</servlet-name>
+        <servlet-class>Controllers.EditServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>EditServlet</servlet-name>
+        <url-pattern>/editEvent</url-pattern>
+        <url-pattern>/editNews</url-pattern>
+        <url-pattern>/updateNews</url-pattern>
+        <url-pattern>/updateEvent</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>AddClubServlet</servlet-name>
+        <servlet-class>Controllers.AddClubServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AddClubServlet</servlet-name>
+        <url-pattern>/addClub</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>DeleteServlet</servlet-name>
+        <servlet-class>Controllers.DeleteClubServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DeleteServlet</servlet-name>
+        <url-pattern>/deleteClub</url-pattern>
+        <url-pattern>/confirmDelete</url-pattern>
+    </servlet-mapping>
 
 </web-app>

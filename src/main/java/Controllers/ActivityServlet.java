@@ -63,6 +63,8 @@ public class ActivityServlet extends HttpServlet {
             Event newEvent = new Event(title, description, localDate, club);
             eventDAO.addEvent(newEvent, club_id);
         }
+        Club clubA = cs.getClub(club_id);
+        request.setAttribute("clubForAdd", clubA);
         request.getRequestDispatcher("activity.jsp?club_id=" + club_id).forward(request,response);
     }
 
