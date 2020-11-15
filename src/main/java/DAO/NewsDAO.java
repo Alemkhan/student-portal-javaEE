@@ -65,11 +65,11 @@ public class NewsDAO implements DAO<News> {
         return rowInserted;
     }
 
-    public boolean deleteNews(int club_id, News news) throws SQLException {
+    public boolean deleteNews(int club_id, int news_id) throws SQLException {
         con = DatabaseConnection.createConnection();
         String sql = "DELETE FROM news WHERE news_id = ? and club_id = ?";
         stmt = con.prepareStatement(sql);
-        stmt.setInt(1, news.getId());
+        stmt.setInt(1, news_id);
         stmt.setInt(2, club_id);
         boolean rowInserted = stmt.executeUpdate() > 0;
         con.close();

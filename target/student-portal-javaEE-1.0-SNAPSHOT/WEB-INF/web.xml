@@ -33,5 +33,14 @@
         <servlet-name>jersey-serlvet</servlet-name>
         <url-pattern>/rest/*</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>ActivityServlet</servlet-name>
+        <servlet-class>Controllers.ActivityServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ActivityServlet</servlet-name>
+        <url-pattern>/activity</url-pattern>
+        <url-pattern>/addActivity</url-pattern>
+    </servlet-mapping>
 
 </web-app>

@@ -14,7 +14,7 @@
 <%@ include file = "components/header.jsp" %>
 <center><h1>Adding activity to <c:out value="${clubForAdd.getClub_name()}"/></h1></center>
 <div class="container">
-    <form action=/addActivity" method="post">
+    <form action="/addActivity" method="post">
         <p>Title</p>
         <input type="text" name="title"><br>
         <p>Description</p>

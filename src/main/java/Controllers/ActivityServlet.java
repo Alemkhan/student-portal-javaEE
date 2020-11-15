@@ -68,6 +68,14 @@ public class ActivityServlet extends HttpServlet {
 
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        int club_id = Integer.parseInt(request.getParameter("club_id"));
+        Club clubBody = null;
+        try {
+            clubBody = cs.getClub(club_id);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        request.setAttribute("clubForAdd", clubBody);
+        request.getRequestDispatcher("activity.jsp?club_id=" + club_id).forward(request,response);
     }
 }
