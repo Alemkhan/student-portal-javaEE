@@ -25,28 +25,31 @@ public class ClubEditServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String action = request.getServletPath();
+        String action = request.getParameter("action");
         try {
-            switch (action) {
-                case "/editClub":
-                    list(request, response);
-                    break;
-                case "/deleteEvent":
-                    deleteEvent(request, response);
-                    break;
-                case "/editEvent":
-                    editEvent(request, response);
-                    break;
+            if (action != null) {
+                switch (action) {
+                    case "editClub":
+                        list(request, response);
+                        break;
+                    case "deleteEvent":
+                        deleteEvent(request, response);
+                        break;
+                    case "editEvent":
+                        editEvent(request, response);
+                        break;
 //                case "/editNews":
 //                    editNews(request, response);
 //                    break;
 //                case "/deleteNews":
 //                    deleteNew(request, response);
 //                    break;
-                default:
-                    list(request, response);
-                    break;
+                    default:
+                        list(request, response);
+                        break;
+                }
             }
+            list(request, response);
         } catch (SQLException ex) {
             throw new ServletException(ex);
         }
