@@ -86,12 +86,14 @@ public class UserDAO implements DAO<User>, LoginDAO<User>{
             Role role = new Role(role_id, role_name);
             Major major = new Major(major_id, major_name);
 
+            con.close();
             if (role_name.equals("admin")) {
                 return new Admin(user_id,fname,lname,localEmail,role);
             } else {
                 return new Student(user_id, fname, lname, localEmail, role, major, getStudentClubs(user_id));
             }
         }
+        con.close();
         return null;
     }
 

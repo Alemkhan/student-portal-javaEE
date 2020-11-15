@@ -75,7 +75,7 @@ public class EventDAO implements DAO<Event>{
         return events;
     }
 
-    public boolean deleteEvent(int event_id, int club_id) throws SQLException {
-        String sql = "DELETE FROM events WHERE event_id = ? and club_id = ?";
-    }
+//    public boolean deleteEvent(int event_id, int club_id) throws SQLException {
+//        String sql = "DELETE FROM events WHERE event_id = ? and club_id = ?";
+//    }
 }
