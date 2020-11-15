@@ -1162,7 +1162,7 @@ ALL PRIVILEGES|moodle:null
     </column>
     <column id="361" parent="341" name="description">
       <Position>3</Position>
-      <DataType>varchar(30)|0s</DataType>
+      <DataType>varchar(200)|0s</DataType>
     </column>
     <column id="362" parent="341" name="avatar">
       <Position>4</Position>
@@ -1197,7 +1197,7 @@ ALL PRIVILEGES|moodle:null
     </column>
     <column id="369" parent="342" name="description">
       <Position>3</Position>
-      <DataType>varchar(30)|0s</DataType>
+      <DataType>varchar(200)|0s</DataType>
     </column>
     <column id="370" parent="342" name="event_date">
       <Position>4</Position>
@@ -1249,7 +1249,7 @@ ALL PRIVILEGES|moodle:null
     </column>
     <column id="380" parent="344" name="description">
       <Position>3</Position>
-      <DataType>varchar(30)|0s</DataType>
+      <DataType>varchar(200)|0s</DataType>
     </column>
     <column id="381" parent="344" name="publish_date">
       <Position>4</Position>
@@ -1316,29 +1316,39 @@ ALL PRIVILEGES|moodle:null
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="395" parent="346" name="password">
+    <column id="395" parent="346" name="group_name">
       <Position>7</Position>
+      <DataType>varchar(32)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="396" parent="346" name="year">
+      <Position>8</Position>
+      <DataType>int(1)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="397" parent="346" name="password">
+      <Position>9</Position>
       <DataType>varchar(30)|0s</DataType>
     </column>
-    <index id="396" parent="346" name="role_id">
+    <index id="398" parent="346" name="role_id">
       <ColNames>role_id</ColNames>
       <Type>btree</Type>
     </index>
-    <index id="397" parent="346" name="major_id">
+    <index id="399" parent="346" name="major_id">
       <ColNames>major_id</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="398" parent="346" name="PRIMARY">
+    <key id="400" parent="346" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>user_id</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="399" parent="346" name="users_ibfk_1">
+    <foreign-key id="401" parent="346" name="users_ibfk_1">
       <ColNames>role_id</ColNames>
       <RefTableName>roles</RefTableName>
       <RefColNames>role_id</RefColNames>
     </foreign-key>
-    <foreign-key id="400" parent="346" name="users_ibfk_2">
+    <foreign-key id="402" parent="346" name="users_ibfk_2">
       <ColNames>major_id</ColNames>
       <RefTableName>majors</RefTableName>
       <RefColNames>major_id</RefColNames>

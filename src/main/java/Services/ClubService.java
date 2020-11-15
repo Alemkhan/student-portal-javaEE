@@ -15,6 +15,7 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 @Path("clubs")
 public class ClubService {
@@ -33,6 +34,16 @@ public class ClubService {
         Club club = clubDAO.get(club_id);
         ArrayList<News> clubNews = clubDAO.getAllClubNews(club_id);
         return club;
+
+    }
+
+    @GET
+    @Path("/getall")
+    @Produces(MediaType.APPLICATION_JSON)
+    public HashMap<Club, String> getAllClubs() throws SQLException {
+
+        return clubDAO.getAllInfo();
+
     }
 
 }

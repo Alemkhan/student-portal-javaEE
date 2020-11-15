@@ -28,6 +28,9 @@
             <li class="nav-item">
                 <a class="nav-link" href="#">Home</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="search.jsp">Search</a>
+            </li>
         </ul>
         <form class="form-inline my-2 my-lg-0">
             <!--!!!!!!!!!!!!!!!!!CSS PLEASE!!!!!!!!!!!!!!!!!!!-->
