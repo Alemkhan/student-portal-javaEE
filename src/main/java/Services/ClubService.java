@@ -16,6 +16,7 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 
 @Path("clubs")
@@ -34,6 +35,8 @@ public class ClubService {
         Club club = clubDAO.get(club_id);
         ArrayList<News> newsList = clubDAO.getAllClubNews(club_id);
         ArrayList<Event> eventsList = eventDAO.getAllClubEvents(club_id);
+        Collections.sort(newsList);
+        Collections.sort(eventsList);
         club.setNewsList(newsList);
         club.setEventsList(eventsList);
         return club;

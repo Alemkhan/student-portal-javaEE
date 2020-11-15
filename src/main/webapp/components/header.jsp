@@ -34,6 +34,9 @@
             <li class="nav-item">
                 <a class="nav-link" href="/dashboard">Home</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="search.jsp">Search</a>
+            </li>
         </ul>
         <form class="form-inline my-2 my-lg-0">
             <a href="profile?id=<c:out value="${sessionScope.user.id}"/>">
