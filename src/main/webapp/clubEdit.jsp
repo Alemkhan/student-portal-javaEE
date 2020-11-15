@@ -12,9 +12,11 @@
 </head>
 <body>
 <%@include file="components/header.jsp"%>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <div class="container">
     <center><h1>List of Events</h1></center><br>
     <div class="row mt-3">
+        <div class="result"></div>
         <table border="1" cellpadding="5">
             <tr>
                 <th>Event ID</th>
@@ -30,12 +32,32 @@
                     <td><c:out value="${event.getTitle()}" /></td>
                     <td><c:out value="${event.getDescription()}" /></td>
                     <td><c:out value="${event.getDate()}" /></td>
-                    <td><a href="/editEvent?club_id=<c:out value='${clubForEdit.getClub_id()}'/>&event_id=<c:out value='${event.getId()}' />">Edit</a></td>
-                    <td><a href="/deleteEvent?event_id=<c:out value='${event.getId()}' />">Delete</a></td>
+                    <td><a id="edit" href="/clubEdit?club_id=<c:out value='${clubForEdit.getClub_id()}'/>&event_id=<c:out value='${event.getId()}' />">Edit</a></td>
+                    <td><a id="delete" onclick="deleteUser(<c:out value='${clubForEdit.getClub_id()}'/>, <c:out value='${event.getId()}' />)" href="/clubEdit?club_id=<c:out value='${clubForEdit.getClub_id()}'/>&event_id=<c:out value='${event.getId()}' />">Delete</a></td>
+                    <input id="club_id" type="hidden" value="<c:out value='${clubForEdit.getClub_id()}'/>">
                 </tr>
             </c:forEach>
         </table>
     </div>
 </div>
 </body>
+<script>
+
+    function deleteUser(club_id, event_id){
+        event.preventDefault();
+        $.ajax({
+            url: "/clubEdit",
+            type: "GET",
+            data: {
+                action : "deleteEvent",
+                club_id : club_id,
+                event_id : event_id
+            },
+            success: function (response) {
+                location.reload();
+            }
+        });
+    };
+
+</script>
 </html>
