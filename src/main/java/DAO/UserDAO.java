@@ -299,6 +299,17 @@ public class UserDAO implements DAO<User>, LoginDAO<User>{
             throwables.printStackTrace();
         }
         return users;
-
     }
+
+    public boolean deleteUser(int user_id) throws SQLException {
+        String sql = "DELETE FROM users WHERE user_id = ?";
+        con = DatabaseConnection.createConnection();
+        stmt = con.prepareStatement(sql);
+        stmt.setInt(1, user_id);
+        boolean rowDeleted = stmt.executeUpdate() > 0;
+        con.close();
+        return rowDeleted;
+    }
+
+//    public boolean addUser()
 }

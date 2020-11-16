@@ -24,7 +24,7 @@
             <option value="event">Event</option>
         </select>
         <input type="hidden" name="club_id" value="<c:out value="${clubForAdd.getClub_id()}"/>">
-        <input type="submit" class="btn-lg btn-success" value="Add">
+        <input type="submit" class="mt-3 btn-lg btn-success" value="Add">
     </form>
 </div>
 </body>

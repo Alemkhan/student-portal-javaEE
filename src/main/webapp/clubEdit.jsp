@@ -75,7 +75,6 @@
 <script>
 
     function deleteNews(club_id, news_id){
-        event.preventDefault();
         $.ajax({
             url: "/clubEdit",
             type: "GET",
@@ -91,7 +90,6 @@
     };
 
     function deleteUser(club_id, event_id){
-        event.preventDefault();
         $.ajax({
             url: "/clubEdit",
             type: "GET",

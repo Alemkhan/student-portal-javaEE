@@ -19,7 +19,6 @@
 <body>
 <%@ include file = "components/header.jsp" %>
 <div class="row m-3">
-
     <div class="list-group col">
         <h2 class="card-header text-light bg-dark">
             CLUBS

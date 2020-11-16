@@ -15,6 +15,7 @@ public abstract class User implements Serializable {
     public User() {
     }
 
+
     public User(int id, String first_name, String last_name, String email, Role role) {
         this.id = id;
         this.first_name = first_name;
