@@ -72,7 +72,7 @@ public class EditServlet extends HttpServlet {
         eventDAO.editEvent(club_id, event);
         Event newEvent = eventDAO.get(event_id);
         request.setAttribute("eventToChange", newEvent);
-        request.getRequestDispatcher("/clubEdit?club_id=" + club_id).forward(request,response);
+        response.sendRedirect("/clubEdit?club_id=" + club_id);
     }
 
     private void updateNews(HttpServletRequest request,HttpServletResponse response) throws SQLException, ServletException, IOException {
@@ -86,7 +86,7 @@ public class EditServlet extends HttpServlet {
         newsDAO.changeNews(club, news);
         News news1 = newsDAO.get(news_id);
         request.setAttribute("newsToChange", news1);
-        request.getRequestDispatcher("/clubEdit?club_id=" + club_id).forward(request,response);
+        response.sendRedirect("/clubEdit?club_id=" + club_id);
     }
 
 }

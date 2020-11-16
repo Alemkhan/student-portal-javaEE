@@ -23,13 +23,13 @@ public class AddClubServlet extends HttpServlet {
         Club club = new Club(clubName, description, null, user);
         try {
             clubDAO.createClub(user.getId(), club);
-            response.sendRedirect("index.jsp");
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
+        response.sendRedirect("/dashboard");
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        doPost(request,response);
     }
 }

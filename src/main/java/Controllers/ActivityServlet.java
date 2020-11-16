@@ -65,7 +65,7 @@ public class ActivityServlet extends HttpServlet {
         }
         Club clubA = cs.getClub(club_id);
         request.setAttribute("clubForAdd", clubA);
-        request.getRequestDispatcher("activity.jsp?club_id=" + club_id).forward(request,response);
+        response.sendRedirect("activity.jsp?club_id=" + club_id);
     }
 
 
