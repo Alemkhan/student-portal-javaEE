@@ -1,6 +1,7 @@
 package Models;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 
 public class Club {
 
@@ -12,6 +13,7 @@ public class Club {
 
     private ArrayList<News> newsList;
     private ArrayList<Event> eventsList;
+    private LinkedHashMap<User, Role> userClubRole;
 
     public ArrayList<News> getNewsList() {
         return newsList;
@@ -27,6 +29,14 @@ public class Club {
 
     public void setEventsList(ArrayList<Event> eventsList) {
         this.eventsList = eventsList;
+    }
+
+    public LinkedHashMap<User, Role> getUserClubRole() {
+        return userClubRole;
+    }
+
+    public void setUserClubRole(LinkedHashMap<User, Role> userClubRole) {
+        this.userClubRole = userClubRole;
     }
 
     public Club() {
