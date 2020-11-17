@@ -1,7 +1,9 @@
 # This is the Advanced Java 1 course final project at
 ## *Astana IT University, created by Alemkhan, Nurahmet, Damir and Kalbek. Student Portal, JavaEE Servlet Web Application*
 
-### As Kanye West said:
+### Once at the lecture, the professor has asked::
 
-> We're living the future so
-> the present is our past.
+> Which one is Albert Einstein?
+
+### One student stood up in silence.
+# This student was Albert Einstein.
