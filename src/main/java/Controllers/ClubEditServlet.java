@@ -65,14 +65,12 @@ public class ClubEditServlet extends HttpServlet {
         int club_id = Integer.parseInt(request.getParameter("club_id"));
         int event_id = Integer.parseInt(request.getParameter("event_id"));
         eventDAO.deleteEvent(event_id, club_id);
-        request.getRequestDispatcher("editClub?club_id=" + club_id).forward(request,response);
     }
 
     private void deleteNew(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException, ServletException {
         int club_id = Integer.parseInt(request.getParameter("club_id"));
         int news_id = Integer.parseInt(request.getParameter("news_id"));
         newsDAO.deleteNews(news_id, club_id);
-        request.getRequestDispatcher("editClub?club_id=" + club_id).forward(request,response);
     }
 
 

@@ -35,7 +35,7 @@
                         <td><c:out value="${event.getDescription()}" /></td>
                         <td><c:out value="${event.getDate()}" /></td>
                         <td><a id="edit" href="/editEvent?event_id=<c:out value='${event.getId()}'/>">Edit</a></td>
-                        <td><a id="delete" href="#" onclick="deleteUser(<c:out value='${clubForEdit.getClub_id()}'/>, <c:out value='${event.getId()}' />)">Delete</a></td>
+                        <td><a href="#" onclick="deleteEvent(<c:out value='${clubForEdit.getClub_id()}'/>, <c:out value='${event.getId()}' />)">Delete</a></td>
                     </tr>
                 </c:forEach>
             </tbody>
@@ -51,7 +51,7 @@
                     <th scope="col">News Title</th>
                     <th scope="col">News Description</th>
                     <th scope="col">Publish Date</th>
-                    <th scope="col"Edit</th>
+                    <th scope="col">Edit</th>
                     <th scope="col">Delete</th>
                 </tr>
             </thead>
@@ -64,7 +64,6 @@
                     <td><c:out value="${news.getDate()}" /></td>
                     <td><a href="/editNews?news_id=<c:out value='${news.getId()}' />">Edit</a></td>
                     <td><a href="#" onclick="deleteNews(<c:out value='${clubForEdit.getClub_id()}'/>, <c:out value='${news.getId()}' />)">Delete</a></td>
-                    <input type="hidden" name="event_id" value="<c:out value='${clubForEdit.getClub_id()}'/>">
                 </tr>
             </c:forEach>
             </tbody>
@@ -83,13 +82,13 @@
                 club_id : club_id,
                 news_id : news_id
             },
-            success: function (response) {
-                location.reload();
+            success: function () {
+                window.location.href = "clubEdit?club_id="+club_id
             }
         });
     };
 
-    function deleteUser(club_id, event_id){
+    function deleteEvent(club_id, event_id){
         $.ajax({
             url: "/clubEdit",
             type: "GET",
@@ -98,8 +97,8 @@
                 club_id : club_id,
                 event_id : event_id
             },
-            success: function (response) {
-                location.reload();
+            success: function () {
+                window.location.href = "clubEdit?club_id="+club_id
             }
         });
     };

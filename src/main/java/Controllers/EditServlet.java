@@ -72,7 +72,6 @@ public class EditServlet extends HttpServlet {
         eventDAO.editEvent(club_id, event);
         Event newEvent = eventDAO.get(event_id);
         request.setAttribute("eventToChange", newEvent);
-        response.sendRedirect("/clubEdit?club_id=" + club_id);
     }
 
     private void updateNews(HttpServletRequest request,HttpServletResponse response) throws SQLException, ServletException, IOException {

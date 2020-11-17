@@ -113,12 +113,11 @@ public class ClubDAO implements DAO<Club> {
         return club_role_saikestendiry;
     }
 
-    private boolean updateClubManager(int ownerId, int clubId) throws SQLException {
-        String sql = "INSERT INTO club_managers (club_id, user_id, club_role_id) VALUES (?, ?, ?)";
+    private boolean updateClubManager(int ownerId) throws SQLException {
+        String sql = "INSERT INTO club_managers (club_id, user_id, club_role_id) VALUES ((SELECT `AUTO_INCREMENT`-1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'final' AND TABLE_NAME = 'clubs'), ?, ?);";
         stmt = con.prepareStatement(sql);
-        stmt.setInt(1, clubId);
-        stmt.setInt(2, ownerId);
-        stmt.setInt(3, 1);
+        stmt.setInt(1, ownerId);
+        stmt.setInt(2, 1);
         return stmt.executeUpdate() > 0;
     }
 
@@ -135,7 +134,7 @@ public class ClubDAO implements DAO<Club> {
         stmt.setInt(4, ownerId);
 
         boolean rowInserted = stmt.executeUpdate() > 0;
-        boolean rowUpdated = updateClubManager(club.getClub_id(), ownerId);
+        boolean rowUpdated = updateClubManager(ownerId);
         con.close();
         return rowInserted && rowUpdated;
     }

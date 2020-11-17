@@ -19,7 +19,7 @@
 <body>
 <%@ include file = "components/header.jsp" %>
 <div class="row m-3">
-    <div class="list-group col">
+    <div class="list-group mb-3 col-lg col-md-12 col-sm-12">
         <h2 class="card-header text-light bg-dark">
             CLUBS
         </h2>
@@ -35,25 +35,19 @@
         </c:if>
     </div>
 
-    <div class="col-7">
+    <div class="col-lg-7 col-md-12 col-sm-12">
         <c:forEach var="newsItem" items="${news}">
             <div class="jumbotron">
                 <h1 class="display-4"><c:out value="${newsItem.getTitle()}"/></h1>
                 <p class="lead"><c:out value="${newsItem.getDescription()}"/></p>
                 <hr class="my-4">
                 <p><c:out value="${newsItem.getDate()}"/> by <c:out value="${newsItem.getClub().getClub_name()}"/></p>
-                <c:if test="${sessionScope.user.role.role_name == 'admin' ||
-                 newsItem.getClub().getOwner().getId == sessionScope.user.id ||
-                 newsItem.getClub().getUserClubRole().get(sessionScope.user.id) == 'moderator' &&
-                 sessionScope.user.id != null}">
-                    <a href="#">Edit</a>
-                </c:if>
                 <!---IMAGE--->
             </div>
         </c:forEach>
     </div>
 
-    <div class="col-3 ml-3">
+    <div class="col-lg col-md-12 col-sm-12">
         <c:forEach var="eventItem" items="${events}">
             <div class="card mb-3">
                 <div class="card-body" style="width: 18rem;">

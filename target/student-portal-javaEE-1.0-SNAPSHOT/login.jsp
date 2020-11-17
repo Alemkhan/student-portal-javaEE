@@ -41,8 +41,12 @@
     <div class="container-login100">
         <div class="wrap-login100">
             <form class="login100-form validate-form" id="userForm" action="/login" method="post">
-
-
+                <div class="container">
+                  <div class="row">
+                      <img class="col h-50 w-50" style="margin-left:auto; margin-top: -250px" src="https://media.discordapp.net/attachments/543099502723072002/778347754992697434/5e1eb349-51d1-431b-a365-6949c31a2107.png">
+                  </div>
+                </div>
+                
                 <span class="login100-form-title p-b-34">
 						Account Login
 				</span>

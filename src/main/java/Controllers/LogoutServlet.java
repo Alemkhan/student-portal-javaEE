@@ -27,7 +27,7 @@ public class LogoutServlet extends HttpServlet {
                     } else {
                         System.out.println("File already exists.");
                     }
-                    FileWriter myWriter = new FileWriter("C:\\Users\\alemh\\filename.txt");
+                    FileWriter myWriter = new FileWriter("C:\\Users\\alemh\\filename.txt", true);
                     myWriter.write(user.getFirst_name() + " " + user.getLast_name() + " Time spend on the website: " + ((int) (new Date().getTime()/1000) - Integer.parseInt(ck.getValue())) + "\n");
                     myWriter.close();
                     System.out.println("Successfully wrote to the file.");

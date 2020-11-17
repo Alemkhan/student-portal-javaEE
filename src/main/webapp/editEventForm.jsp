@@ -11,20 +11,48 @@
 <head>
     <title>Edit Event</title>
 </head>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <body class="bg-light">
 <%@ include file = "components/header.jsp" %>
 <div class="container">
     <div class="row m-3 ">
-        <form action="/updateEvent" class="form border-dark border-1" method="post">
+        <form class="form border-dark border-1">
             <h4>Title</h4>
-            <input type="text" name="title" class="form-control" value="<c:out value='${eventToChange.getTitle()}'/>"><br>
+            <input id="title" type="text" name="title" class="form-control" value="<c:out value='${eventToChange.getTitle()}'/>"><br>
             <h4>Description</h4>
-            <input type="text" class="form-control" name="description" value="<c:out value='${eventToChange.getDescription()}'/>"><br>
-            <input type="hidden"  class="form-control" name="event_id" value="<c:out value='${eventToChange.getId()}'/>"><br>
-            <input type="hidden" name="club_id" value="<c:out value='${eventToChange.getClub().getClub_id()}'/>"><br>
-            <input type="submit" class="btn-lg btn-success" value="Edit">
+            <input id="desc" type="text" class="form-control" name="description" value="<c:out value='${eventToChange.getDescription()}'/>"><br>
+            <input id="event_id" type="hidden"  class="form-control" name="event_id" value="<c:out value='${eventToChange.getId()}'/>"><br>
+            <input id="club_id" type="hidden" name="club_id" value="<c:out value='${eventToChange.getClub().getClub_id()}'/>"><br>
+            <input id="updateEvent" type="button" class="btn-lg btn-success" value="Edit">
         </form>
     </div>
 </div>
 </body>
+<script>
+    $("#updateEvent").click(function () {
+
+        title = $("#title").val();
+        desc = $("#desc").val();
+        event_id = $("#event_id").val()
+        club_id = $("#club_id").val()
+
+        $.ajax({
+            url: "/updateEvent",
+            type: 'POST',
+            data: {
+                club_id: club_id,
+                title: title,
+                description: desc,
+                event_id: event_id,
+            },
+            success: function (data) {
+                console.log(data)
+                window.location.href = "clubEdit?club_id="+club_id
+            },
+            error: function (data) {
+                console.log(data)
+            }
+        });
+    });
+</script>
 </html>
