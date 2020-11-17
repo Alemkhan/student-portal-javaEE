@@ -14,7 +14,7 @@ import java.util.Date;
 @WebServlet(name = "LoginServlet", value = "/login")
 public class LoginServlet extends HttpServlet {
 
-    private UserService us = new UserService();
+    private final UserService us = new UserService();
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 

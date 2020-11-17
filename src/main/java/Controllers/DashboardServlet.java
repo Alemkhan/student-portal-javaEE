@@ -37,7 +37,6 @@ public class DashboardServlet extends HttpServlet {
             request.setAttribute("clubs", clubs);
             request.setAttribute("events", events);
             request.setAttribute("news", news);
-            System.out.println(news);
             request.getRequestDispatcher("index.jsp").forward(request,response);
 
         } catch (SQLException throwables) {
