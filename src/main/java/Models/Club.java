@@ -13,7 +13,7 @@ public class Club {
 
     private ArrayList<News> newsList;
     private ArrayList<Event> eventsList;
-    private LinkedHashMap<User, Role> userClubRole;
+    private LinkedHashMap<Integer, Role> userClubRole;
 
     public ArrayList<News> getNewsList() {
         return newsList;
@@ -31,11 +31,11 @@ public class Club {
         this.eventsList = eventsList;
     }
 
-    public LinkedHashMap<User, Role> getUserClubRole() {
+    public LinkedHashMap<Integer, Role> getUserClubRole() {
         return userClubRole;
     }
 
-    public void setUserClubRole(LinkedHashMap<User, Role> userClubRole) {
+    public void setUserClubRole(LinkedHashMap<Integer, Role> userClubRole) {
         this.userClubRole = userClubRole;
     }
 

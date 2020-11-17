@@ -55,7 +55,7 @@ public class ClubDAO implements DAO<Club> {
     public ArrayList<Club> getAll() throws SQLException {
 
         ArrayList<Club> clubs = new ArrayList<>();
-        LinkedHashMap<User, Role> club_role_saikestendiry = new LinkedHashMap<>();
+        LinkedHashMap<Integer, Role> club_role_saikestendiry = new LinkedHashMap<>();
 
         try {
             con = DatabaseConnection.createConnection();
@@ -86,9 +86,9 @@ public class ClubDAO implements DAO<Club> {
         return clubs;
     }
 
-    private LinkedHashMap<User, Role> getClubRoles(int club_Id) {
+    private LinkedHashMap<Integer, Role> getClubRoles(int club_Id) {
 
-        LinkedHashMap<User, Role> club_role_saikestendiry = new LinkedHashMap<>();
+        LinkedHashMap<Integer, Role> club_role_saikestendiry = new LinkedHashMap<>();
 
         try {
 
@@ -102,9 +102,7 @@ public class ClubDAO implements DAO<Club> {
                 int club_role_id = resultSet.getInt("club_role_id");
                 String club_role_name = resultSet.getString("club_role_name");
                 Role role = new Role(club_role_id, club_role_name);
-                User member = new Student();
-                member.setId(user_id);
-                club_role_saikestendiry.put(member, role);
+                club_role_saikestendiry.put(user_id, role);
             }
             return club_role_saikestendiry;
         } catch (SQLException e) {
