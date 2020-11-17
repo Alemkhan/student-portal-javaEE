@@ -5,5 +5,5 @@
 
 > Which one is Albert Einstein?
 
-### One student stood up in silence.
+### One student stood up in the silence.
 > **This student was Albert Einstein**.
