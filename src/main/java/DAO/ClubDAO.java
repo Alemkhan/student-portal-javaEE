@@ -21,6 +21,7 @@ public class ClubDAO implements DAO<Club> {
     public Club get(int id) {
 
         Club club = new Club();
+        LinkedHashMap<Integer, Role> club_role_saikestendiry = new LinkedHashMap<>();
 
         try {
 
@@ -41,7 +42,10 @@ public class ClubDAO implements DAO<Club> {
                 User owner = new Student();
                 owner.setId(owner_id);
                 owner.setEmail(owner_email);
+                club_role_saikestendiry = getClubRoles(club_id);
                 club = new Club(club_id, club_name, club_description, club_avatar, owner);
+                club.setUserClubRole(club_role_saikestendiry);
+                con.close();
             }
 
         } catch (SQLException e) {
@@ -55,7 +59,7 @@ public class ClubDAO implements DAO<Club> {
     public ArrayList<Club> getAll() throws SQLException {
 
         ArrayList<Club> clubs = new ArrayList<>();
-        LinkedHashMap<User, Role> club_role_saikestendiry = new LinkedHashMap<>();
+        LinkedHashMap<Integer, Role> club_role_saikestendiry = new LinkedHashMap<>();
 
         try {
             con = DatabaseConnection.createConnection();
@@ -80,15 +84,13 @@ public class ClubDAO implements DAO<Club> {
             con.close();
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            con.close();
         }
         return clubs;
     }
 
-    private LinkedHashMap<User, Role> getClubRoles(int club_Id) {
+    private LinkedHashMap<Integer, Role> getClubRoles(int club_Id) {
 
-        LinkedHashMap<User, Role> club_role_saikestendiry = new LinkedHashMap<>();
+        LinkedHashMap<Integer, Role> club_role_saikestendiry = new LinkedHashMap<>();
 
         try {
 
@@ -96,15 +98,13 @@ public class ClubDAO implements DAO<Club> {
                     "from club_managers cm join club_roles cr on cm.club_role_id = cr.club_role_id where cm.club_id = ?;";
             stmt = con.prepareStatement(sql);
             stmt.setInt(1, club_Id);
-            resultSet = stmt.executeQuery();
-            while (resultSet.next()) {
-                int user_id = resultSet.getInt("user_id");
-                int club_role_id = resultSet.getInt("club_role_id");
-                String club_role_name = resultSet.getString("club_role_name");
+            ResultSet resultSet1 = stmt.executeQuery();
+            while (resultSet1.next()) {
+                int user_id = resultSet1.getInt("user_id");
+                int club_role_id = resultSet1.getInt("club_role_id");
+                String club_role_name = resultSet1.getString("club_role_name");
                 Role role = new Role(club_role_id, club_role_name);
-                User member = new Student();
-                member.setId(user_id);
-                club_role_saikestendiry.put(member, role);
+                club_role_saikestendiry.put(user_id, role);
             }
             return club_role_saikestendiry;
         } catch (SQLException e) {

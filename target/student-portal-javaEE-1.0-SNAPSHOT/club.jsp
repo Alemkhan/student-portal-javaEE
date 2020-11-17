@@ -17,8 +17,12 @@
 <%@ include file = "components/header.jsp" %>
 <!--FRONT PLEASE-->
 
+<c:out value="${club.getUserClubRole()}" />
+<c:out value="${sessionScope.user.role.role_name}"/>
+
 <c:if test="${sessionScope.user.role.role_name == 'admin' ||
-              newsItem.getClub().getOwner().getId == sessionScope.user.id &&
+              club.getOwner().getId() == sessionScope.user.id ||
+              club.getUserClubRole().get(sessionScope.user.id).getRole_name() == 'moderator' &&
               sessionScope.user.id != null}">
     <a href="/clubEdit?club_id=<c:out value="${club.getClub_id()}"/>" class="m-3 btn-lg btn-primary">EDIT</a>
     <a href="/activity?club_id=<c:out value="${club.getClub_id()}"/>" class="m-3 btn-lg btn-primary">Adding activity</a>
